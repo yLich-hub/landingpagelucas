@@ -36,6 +36,21 @@ const siteUrl = Astro.site ?? "https://SEU-DOMINIO.vercel.app";
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
+
+    <script
+      is:inline
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Person",
+        name: perfil.nome,
+        jobTitle: perfil.cargo,
+        email: `mailto:${perfil.email}`,
+        url: siteUrl.toString(),
+        sameAs: [perfil.github, perfil.linkedin],
+        address: { "@type": "PostalAddress", addressLocality: "Cascavel", addressRegion: "PR", addressCountry: "BR" },
+      })}
+    />
   </head>
   <body class="min-h-screen antialiased" style="background: var(--bg); color: var(--fg);">
     <slot />
