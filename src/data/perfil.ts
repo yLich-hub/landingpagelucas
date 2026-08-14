@@ -1,20 +1,18 @@
-// ⚠️ Fase 0 do guia: preencha com seus dados reais antes de publicar.
 export const perfil = {
   nome: "Lucas Maciel Vieira",
-  cargo: "PREENCHER — ex: Desenvolvedor Back-end",
+  cargo: "Estudante de Engenharia de Software",
   posicionamento:
-    "PREENCHER — Sou [nome], [cargo] focado em [especialidade]. Construo [tipo de coisa] com [stack].",
-  bioCurta: "PREENCHER — 2 a 3 frases sobre você.",
-  bioMedia: "PREENCHER — 1 parágrafo sobre você.",
-  cidade: "PREENCHER — Cidade, UF",
-  disponibilidade: "PREENCHER — remoto / híbrido / presencial",
+    "Em transição da administração para o desenvolvimento de software. Primeiro projeto full-stack no ar: pesquisa jurídica com busca híbrida, em Next.js, TypeScript e Postgres.",
+  bioCurta:
+    "Estudante de Engenharia de Software na FAG, em transição da administração para o desenvolvimento. Primeiro projeto full-stack em produção.",
+  bioMedia:
+    "Sou formado em Administração e curso Engenharia de Software na FAG (Centro Universitário da Fundação Assis Gurgacz), em Cascavel — PR. Antes de migrar para a tecnologia, trabalhei com vendas e rotinas administrativas — experiência que me deu disciplina de processo e contato direto com cliente. Hoje aplico isso no código: meu primeiro projeto full-stack, o Jesbick, está no ar, construído com Next.js, TypeScript e Supabase. Busco minha primeira oportunidade profissional em desenvolvimento.",
+  cidade: "Cascavel — PR",
+  disponibilidade: "remoto, híbrido ou presencial",
   email: "lucasmacielvieira55@gmail.com",
-  github: "https://github.com/PREENCHER",
-  linkedin: "https://www.linkedin.com/in/PREENCHER",
+  github: "https://github.com/yLich-hub",
+  linkedin: "https://www.linkedin.com/in/lucas-maciel-vieira-952865223/",
   curriculoPdf: "/curriculo-lucas-maciel-vieira.pdf",
-  numeros: [
-    { valor: "0", label: "PREENCHER — ex: anos de experiência" },
-    { valor: "0", label: "PREENCHER — ex: projetos no ar" },
-    { valor: "0", label: "PREENCHER — ex: tecnologias" },
-  ],
+  // deixe vazio para esconder a faixa de números do hero
+  numeros: [] as { valor: string; label: string }[],
 };

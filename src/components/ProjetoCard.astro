@@ -8,7 +8,7 @@ interface Props {
 const { projeto } = Astro.props;
 ---
 
-<article class="grid overflow-hidden rounded-[var(--radius)] border md:grid-cols-2" style="border-color: var(--border); background: var(--bg-elevated);">
+<article class="grid overflow-hidden rounded-(--radius) border md:grid-cols-2" style="border-color: var(--border); background: var(--bg-elevated);">
   <img
     src={projeto.imagem}
     alt={`Captura de tela do projeto ${projeto.nome}`}
@@ -35,7 +35,7 @@ const { projeto } = Astro.props;
     )}
     <ul class="flex flex-wrap gap-2">
       {projeto.stack.map((tech) => (
-        <li class="rounded-[var(--radius)] border px-2.5 py-1" style="border-color: var(--border); font-size: var(--step--1); color: var(--fg-muted);">
+        <li class="rounded-(--radius) border px-2.5 py-1" style="border-color: var(--border); font-size: var(--step--1); color: var(--fg-muted);">
           {tech}
         </li>
       ))}
@@ -45,7 +45,7 @@ const { projeto } = Astro.props;
         href={projeto.repo}
         target="_blank"
         rel="noopener noreferrer"
-        class="rounded-[var(--radius)] border px-4 py-2 font-medium transition-colors hover:border-[var(--fg-muted)]"
+        class="rounded-(--radius) border px-4 py-2 font-medium transition-colors hover:border-(--fg-muted)"
         style="border-color: var(--border); font-size: var(--step--1);"
       >
         Ver código
@@ -55,7 +55,7 @@ const { projeto } = Astro.props;
           href={projeto.demo}
           target="_blank"
           rel="noopener noreferrer"
-          class="rounded-[var(--radius)] px-4 py-2 font-medium transition-opacity hover:opacity-85"
+          class="rounded-(--radius) px-4 py-2 font-medium transition-opacity hover:opacity-85"
           style="background: var(--accent); color: var(--bg); font-size: var(--step--1);"
         >
           Ver ao vivo

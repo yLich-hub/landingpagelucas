@@ -9,13 +9,13 @@ import { stack } from "../data/stack";
     </h2>
     <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
       {stack.map((g) => (
-        <div class="rounded-[var(--radius)] border p-6" style="border-color: var(--border); background: var(--bg-elevated);">
+        <div class="rounded-(--radius) border p-6" style="border-color: var(--border); background: var(--bg-elevated);">
           <h3 class="mb-4 font-medium" style="font-family: var(--font-mono); font-size: var(--step--1); color: var(--accent);">
             {g.grupo}
           </h3>
           <ul class="flex flex-wrap gap-2">
             {g.itens.map((item) => (
-              <li class="rounded-[var(--radius)] border px-2.5 py-1" style="border-color: var(--border); font-size: var(--step--1); color: var(--fg-muted);">
+              <li class="rounded-(--radius) border px-2.5 py-1" style="border-color: var(--border); font-size: var(--step--1); color: var(--fg-muted);">
                 {item}
               </li>
             ))}

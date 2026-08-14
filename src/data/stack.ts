@@ -3,10 +3,11 @@ export interface GrupoStack {
   itens: string[];
 }
 
-// ⚠️ Regra do guia: só tecnologias que você defenderia numa entrevista.
+// ⚠️ Pré-preenchido com base no projeto Jesbick e neste site.
+// Edite à vontade — regra do guia: só o que você defenderia numa entrevista.
 export const stack: GrupoStack[] = [
-  { grupo: "Linguagens", itens: ["PREENCHER"] },
-  { grupo: "Frameworks", itens: ["PREENCHER"] },
-  { grupo: "Ferramentas", itens: ["PREENCHER"] },
-  { grupo: "Bancos de dados", itens: ["PREENCHER"] },
+  { grupo: "Linguagens", itens: ["TypeScript", "JavaScript", "Python", "SQL"] },
+  { grupo: "Frameworks", itens: ["Next.js", "React", "Astro", "Tailwind CSS"] },
+  { grupo: "Ferramentas", itens: ["Git & GitHub", "Vercel", "Supabase", "VS Code"] },
+  { grupo: "Bancos de dados", itens: ["PostgreSQL", "pgvector"] },
 ];

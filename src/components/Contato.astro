@@ -12,19 +12,19 @@ import { perfil } from "../data/perfil";
     </p>
     <a
       href={`mailto:${perfil.email}`}
-      class="mt-6 inline-block break-all font-bold underline decoration-2 underline-offset-8 transition-colors hover:text-[var(--accent)]"
+      class="mt-6 inline-block break-all font-bold underline decoration-2 underline-offset-8 transition-colors hover:text-(--accent)"
       style="font-family: var(--font-mono); font-size: var(--step-1); text-decoration-color: var(--accent);"
     >
       {perfil.email}
     </a>
     <div class="mt-10 flex flex-wrap items-center justify-center gap-4">
-      <a href={perfil.curriculoPdf} download class="rounded-[var(--radius)] px-6 py-3 font-medium transition-opacity hover:opacity-85" style="background: var(--accent); color: var(--bg);">
+      <a href={perfil.curriculoPdf} download class="rounded-(--radius) px-6 py-3 font-medium transition-opacity hover:opacity-85" style="background: var(--accent); color: var(--bg);">
         Baixar currículo (PDF)
       </a>
-      <a href={perfil.github} target="_blank" rel="noopener noreferrer" class="rounded-[var(--radius)] border px-6 py-3 font-medium transition-colors hover:border-[var(--fg-muted)]" style="border-color: var(--border);">
+      <a href={perfil.github} target="_blank" rel="noopener noreferrer" class="rounded-(--radius) border px-6 py-3 font-medium transition-colors hover:border-(--fg-muted)" style="border-color: var(--border);">
         GitHub
       </a>
-      <a href={perfil.linkedin} target="_blank" rel="noopener noreferrer" class="rounded-[var(--radius)] border px-6 py-3 font-medium transition-colors hover:border-[var(--fg-muted)]" style="border-color: var(--border);">
+      <a href={perfil.linkedin} target="_blank" rel="noopener noreferrer" class="rounded-(--radius) border px-6 py-3 font-medium transition-colors hover:border-(--fg-muted)" style="border-color: var(--border);">
         LinkedIn
       </a>
     </div>
