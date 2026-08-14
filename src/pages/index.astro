@@ -1,14 +1,14 @@
 ---
 import Base from "../layouts/Base.astro";
+import Nav from "../components/Nav.astro";
+import Hero from "../components/Hero.astro";
 ---
 
 <Base>
+  <Nav />
   <main>
-    <!-- As seções entram aqui, uma por vez, nesta ordem:
-         Nav → Hero → Sobre → Stack → Marquee → Projetos →
+    <Hero />
+    <!-- próximas seções: Sobre → Stack → Marquee → Projetos →
          Experiência → Formação → Contato → Footer -->
-    <h1 class="p-8" style="font-size: var(--step-2); font-family: var(--font-display);">
-      Setup ok — próxima etapa: Nav e Hero
-    </h1>
   </main>
 </Base>

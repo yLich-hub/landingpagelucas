@@ -1,5 +1,19 @@
 @import "tailwindcss";
 
+/* fontes variáveis auto-hospedadas (subset latino) */
+@font-face {
+  font-family: "Archivo";
+  src: url("/fonts/archivo-latin.woff2") format("woff2");
+  font-weight: 100 900;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/inter-latin.woff2") format("woff2");
+  font-weight: 100 900;
+  font-display: swap;
+}
+
 :root {
   /* superfícies */
   --bg:          #0B0B0F;
@@ -10,9 +24,9 @@
   --fg:          #F2F2F5;
   --fg-muted:    #8A8A9A;
 
-  /* acento — definir na Fase 0 (uma cor só) */
-  --accent:      #FF3D8A;
-  --accent-dim:  #B32A61;
+  /* acento — âmbar quente (Fase 0) */
+  --accent:      #FBBF24;
+  --accent-dim:  #B38A1D;
 
   /* tipografia */
   --font-display: "Archivo", sans-serif;

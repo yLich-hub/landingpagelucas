@@ -21,7 +21,7 @@ GitHub, LinkedIn e projetos.
 ## Design system
 - Fundo: `--bg` #0B0B0F | Elevado: `--bg-elevated` #14141B
 - Texto: `--fg` #F2F2F5 | Secundário: `--fg-muted` #8A8A9A
-- Acento: `--accent` [A DEFINIR na Fase 0] — usado com parcimônia, é o único ponto de cor
+- Acento: `--accent` #FBBF24 (âmbar quente) — usado com parcimônia, é o único ponto de cor
 - Display: Archivo | Corpo: Inter | Mono: JetBrains Mono (a confirmar)
 - Escala de tipo com `clamp()`, sem media query para tamanho de fonte
 - Raio de borda: 4px. Sem sombra difusa; separação por borda de 1px.
