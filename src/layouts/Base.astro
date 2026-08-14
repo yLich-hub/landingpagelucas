@@ -1,0 +1,41 @@
+---
+import "../styles/global.css";
+import { perfil } from "../data/perfil";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = `${perfil.nome} — ${perfil.cargo}`,
+  description = perfil.bioCurta,
+} = Astro.props;
+
+const siteUrl = Astro.site ?? "https://SEU-DOMINIO.vercel.app";
+---
+
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL("/og-image.png", siteUrl)} />
+    <meta property="og:url" content={siteUrl} />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+  </head>
+  <body class="min-h-screen antialiased" style="background: var(--bg); color: var(--fg);">
+    <slot />
+  </body>
+</html>

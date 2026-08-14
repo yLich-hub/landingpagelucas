@@ -1,0 +1,47 @@
+@import "tailwindcss";
+
+:root {
+  /* superfícies */
+  --bg:          #0B0B0F;
+  --bg-elevated: #14141B;
+  --border:      #262633;
+
+  /* texto */
+  --fg:          #F2F2F5;
+  --fg-muted:    #8A8A9A;
+
+  /* acento — definir na Fase 0 (uma cor só) */
+  --accent:      #FF3D8A;
+  --accent-dim:  #B32A61;
+
+  /* tipografia */
+  --font-display: "Archivo", sans-serif;
+  --font-body:    "Inter", system-ui, sans-serif;
+  --font-mono:    "JetBrains Mono", monospace;
+
+  /* escala de tipo (clamp = responsivo sem media query) */
+  --step--1: clamp(0.83rem, 0.8rem + 0.15vw, 0.9rem);
+  --step-0:  clamp(1rem, 0.95rem + 0.25vw, 1.13rem);
+  --step-1:  clamp(1.4rem, 1.2rem + 1vw, 2rem);
+  --step-2:  clamp(2rem, 1.5rem + 2.5vw, 3.5rem);
+  --step-3:  clamp(3rem, 2rem + 6vw, 8rem);
+
+  /* espaçamento */
+  --space-section: clamp(5rem, 10vw, 10rem);
+  --radius: 4px;
+}
+
+html {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
