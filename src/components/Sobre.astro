@@ -1,0 +1,28 @@
+---
+import { perfil } from "../data/perfil";
+---
+
+<section id="sobre" class="px-4 md:px-6" style="padding-block: var(--space-section);">
+  <div class="mx-auto grid max-w-6xl items-start gap-10 md:grid-cols-[2fr_1fr]">
+    <div>
+      <h2 class="mb-6 font-black uppercase tracking-tight" style="font-family: var(--font-display); font-size: var(--step-2);">
+        Sobre
+      </h2>
+      <p class="max-w-prose" style="font-size: var(--step-0); color: var(--fg-muted); line-height: 1.7;">
+        {perfil.bioMedia}
+      </p>
+      <p class="mt-6" style="font-family: var(--font-mono); font-size: var(--step--1); color: var(--fg-muted);">
+        <span style="color: var(--accent);">▸</span> {perfil.cidade} · {perfil.disponibilidade}
+      </p>
+    </div>
+    <img
+      src="/images/foto-perfil.webp"
+      alt={`Foto de ${perfil.nome}`}
+      width="400"
+      height="400"
+      loading="lazy"
+      class="w-full max-w-xs justify-self-center rounded-[var(--radius)] border md:justify-self-end"
+      style="border-color: var(--border); background: var(--bg-elevated);"
+    />
+  </div>
+</section>

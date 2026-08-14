@@ -2,13 +2,25 @@
 import Base from "../layouts/Base.astro";
 import Nav from "../components/Nav.astro";
 import Hero from "../components/Hero.astro";
+import Sobre from "../components/Sobre.astro";
+import Stack from "../components/Stack.astro";
+import Marquee from "../components/Marquee.astro";
+import Projetos from "../components/Projetos.astro";
+import Experiencia from "../components/Experiencia.astro";
+import Contato from "../components/Contato.astro";
+import Footer from "../components/Footer.astro";
 ---
 
 <Base>
   <Nav />
   <main>
     <Hero />
-    <!-- próximas seções: Sobre → Stack → Marquee → Projetos →
-         Experiência → Formação → Contato → Footer -->
+    <Sobre />
+    <Stack />
+    <Marquee />
+    <Projetos />
+    <Experiencia />
+    <Contato />
   </main>
+  <Footer />
 </Base>

@@ -1,0 +1,37 @@
+---
+import { stack } from "../data/stack";
+
+const itens = stack.flatMap((g) => g.itens).filter((i) => !i.startsWith("PREENCHER"));
+const conteudo = itens.length > 0 ? itens : ["Astro", "Tailwind", "TypeScript"];
+---
+
+<div class="marquee overflow-hidden border-y py-4" style="border-color: var(--border);" aria-hidden="true">
+  <div class="marquee-track flex w-max gap-8">
+    {[0, 1].map(() => (
+      <ul class="flex shrink-0 items-center gap-8 pr-8 font-bold uppercase" style="font-family: var(--font-display); font-size: var(--step-1); color: var(--fg-muted);">
+        {conteudo.map((item) => (
+          <>
+            <li>{item}</li>
+            <li style="color: var(--accent);">·</li>
+          </>
+        ))}
+      </ul>
+    ))}
+  </div>
+</div>
+
+<style>
+  .marquee-track {
+    animation: marquee 25s linear infinite;
+  }
+  .marquee:hover .marquee-track {
+    animation-play-state: paused;
+  }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-track { animation: none; }
+  }
+</style>

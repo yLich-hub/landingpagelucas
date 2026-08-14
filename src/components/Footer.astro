@@ -1,0 +1,17 @@
+---
+import { perfil } from "../data/perfil";
+
+const ano = new Date().getFullYear();
+---
+
+<footer class="border-t px-4 py-8 md:px-6" style="border-color: var(--border);">
+  <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 sm:flex-row" style="font-size: var(--step--1); color: var(--fg-muted);">
+    <p>© {ano} {perfil.nome}</p>
+    <ul class="flex items-center gap-5">
+      <li><a href={perfil.github} target="_blank" rel="noopener noreferrer" class="transition-colors hover:text-[var(--fg)]">GitHub</a></li>
+      <li><a href={perfil.linkedin} target="_blank" rel="noopener noreferrer" class="transition-colors hover:text-[var(--fg)]">LinkedIn</a></li>
+      <li><a href={`mailto:${perfil.email}`} class="transition-colors hover:text-[var(--fg)]">E-mail</a></li>
+      <li><a href="https://github.com/PREENCHER/portfolio" target="_blank" rel="noopener noreferrer" class="transition-colors hover:text-[var(--fg)]">Código deste site</a></li>
+    </ul>
+  </div>
+</footer>
