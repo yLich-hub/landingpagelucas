@@ -16,7 +16,7 @@ const { projeto } = Astro.props;
     <Image
       src={projeto.imagem}
       alt={textos.alt.projeto(projeto.nome)}
-      widths={[600, 1200]}
+      widths={[400, 800, 1200]}
       sizes="(min-width: 1024px) 50vw, 100vw"
       loading="lazy"
       class="aspect-16/10 w-full object-cover object-top lg:absolute lg:inset-0 lg:aspect-auto lg:h-full"

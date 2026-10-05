@@ -1,6 +1,9 @@
 ---
 import { perfil } from "../data/perfil";
 import { textos } from "../data/textos";
+
+// quebra de linha preferencial antes do "@" em telas estreitas
+const [usuario, dominio] = perfil.email.split("@");
 ---
 
 <section id="contato" class="px-4 text-center md:px-6" style="padding-block: var(--space-section);">
@@ -13,10 +16,10 @@ import { textos } from "../data/textos";
     </p>
     <a
       href={`mailto:${perfil.email}`}
-      class="mt-6 inline-block break-all font-bold underline decoration-2 underline-offset-8 transition-colors hover:text-(--accent) active:text-(--accent)"
+      class="mt-6 inline-block wrap-anywhere font-bold underline decoration-2 underline-offset-8 transition-colors hover:text-(--accent) active:text-(--accent)"
       style="font-family: var(--font-mono); font-size: var(--step-1); text-decoration-color: var(--accent);"
     >
-      {perfil.email}
+      {usuario}<wbr />@{dominio}
     </a>
     <div class="mt-10 flex flex-wrap items-center justify-center gap-4">
       <a href={perfil.curriculoPdf} download class="rounded-(--radius) px-6 py-3 font-medium pressable hover:opacity-85" style="background: var(--accent); color: var(--bg);">
