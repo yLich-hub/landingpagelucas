@@ -43,6 +43,17 @@
   /* espaçamento */
   --space-section: clamp(5rem, 10vw, 10rem);
   --radius: 4px;
+
+  /* movimento */
+  --ease-out:       cubic-bezier(0.23, 1, 0.32, 1); /* entradas e press */
+  --duration-hover: 150ms;
+  --duration-press: 160ms;
+}
+
+/* transições padrão do Tailwind (transition-colors, transition-opacity…) leem os tokens */
+@theme inline {
+  --default-transition-duration: var(--duration-hover);
+  --default-transition-timing-function: ease;
 }
 
 html {
@@ -52,10 +63,8 @@ html {
   scroll-behavior: smooth;
 }
 
+/* reduced-motion: só o scroll suave é global. Cada animação que move algo
+   trata o próprio caso no componente (ver Marquee.astro). */
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
+  html { scroll-behavior: auto; }
 }
