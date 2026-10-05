@@ -16,10 +16,12 @@ export const experiencias: Experiencia[] = [
   {
     cargo: "Estagiário",
     empresa: "CAPS 3 — Centro de Atenção Psicossocial",
+    periodo: "2020 — 2021",
   },
   {
     cargo: "Auxiliar Administrativo",
     empresa: "Escola de Idiomas Wizard",
+    periodo: "2022 — 2023",
   },
   {
     cargo: "Pós-Vendas",
