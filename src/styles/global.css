@@ -67,6 +67,9 @@
     border-color var(--duration-hover) ease,
     opacity var(--duration-hover) ease,
     transform var(--duration-press) var(--ease-out);
+  /* toque longo não seleciona o rótulo do botão */
+  user-select: none;
+  -webkit-user-select: none;
 
   &:active {
     transform: scale(0.97);
@@ -84,6 +87,11 @@ html {
   color: var(--fg);
   font-family: var(--font-body);
   scroll-behavior: smooth;
+}
+
+/* toque dispara o clique na hora, sem esperar um possível duplo toque */
+a, button {
+  touch-action: manipulation;
 }
 
 /* reduced-motion: só o scroll suave é global. Cada animação que move algo
