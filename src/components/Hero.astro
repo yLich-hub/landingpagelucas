@@ -57,9 +57,11 @@ import { perfil } from "../data/perfil";
     from { opacity: 0; transform: translateY(12px); }
   }
 
-  /* reduced-motion: mantém só o fade, sem deslocamento */
+  /* reduced-motion: só um fade curto, tudo junto, sem deslocamento nem escalonamento */
   @media (prefers-reduced-motion: reduce) {
-    .hero-enter { animation-name: hero-fade; }
+    .hero-enter {
+      animation: hero-fade var(--duration-fade) ease both;
+    }
   }
   @keyframes hero-fade {
     from { opacity: 0; }
