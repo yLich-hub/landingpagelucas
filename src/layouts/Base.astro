@@ -20,6 +20,8 @@ const siteUrl = Astro.site ?? "https://SEU-DOMINIO.vercel.app";
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="color-scheme" content="dark" />
+    <!-- exceção à regra de hex: meta tag não lê variável CSS. Manter igual a --bg em global.css -->
+    <meta name="theme-color" content="#0B0B0F" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <link rel="preload" href="/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin />
