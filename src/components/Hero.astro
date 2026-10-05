@@ -1,5 +1,6 @@
 ---
 import { perfil } from "../data/perfil";
+import { projetos } from "../data/projetos";
 ---
 
 <section id="topo" class="flex min-h-svh flex-col justify-center px-4 pt-20 md:px-6">
@@ -8,7 +9,7 @@ import { perfil } from "../data/perfil";
       {perfil.cargo} · {perfil.cidade}
     </p>
 
-    <h1 class="hero-enter font-black uppercase leading-[0.95] tracking-tight" style="--i: 1; font-family: var(--font-display); font-size: var(--step-3);">
+    <h1 class="hero-enter font-black uppercase leading-[0.95] tracking-tight wrap-break-word" style="--i: 1; font-family: var(--font-display); font-size: var(--step-3);">
       {perfil.nome}
     </h1>
 
@@ -17,13 +18,15 @@ import { perfil } from "../data/perfil";
     </p>
 
     <div class="hero-enter mt-10 flex flex-wrap items-center gap-4" style="--i: 3;">
-      <a
-        href="#projetos"
-        class="rounded-(--radius) px-6 py-3 font-medium pressable hover:opacity-85"
-        style="background: var(--accent); color: var(--bg);"
-      >
-        Ver projetos
-      </a>
+      {projetos.length > 0 && (
+        <a
+          href="#projetos"
+          class="rounded-(--radius) px-6 py-3 font-medium pressable hover:opacity-85"
+          style="background: var(--accent); color: var(--bg);"
+        >
+          Ver projetos
+        </a>
+      )}
       <a
         href={perfil.curriculoPdf}
         download
@@ -35,7 +38,7 @@ import { perfil } from "../data/perfil";
     </div>
 
     {perfil.numeros.length > 0 && (
-      <dl class="hero-enter mt-16 grid grid-cols-3 gap-4 border-t pt-8" style="--i: 4; border-color: var(--border);">
+      <dl class="hero-enter mt-16 grid grid-cols-[repeat(auto-fit,minmax(8rem,1fr))] gap-4 border-t pt-8" style="--i: 4; border-color: var(--border);">
         {perfil.numeros.map((n) => (
           <div>
             <dd class="font-black" style="font-family: var(--font-display); font-size: var(--step-2);">{n.valor}</dd>

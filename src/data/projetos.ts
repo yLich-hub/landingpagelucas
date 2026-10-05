@@ -1,3 +1,6 @@
+import type { ImageMetadata } from "astro";
+import jesbick from "../assets/projetos/jesbick.png";
+
 export interface Projeto {
   nome: string;
   descricao: string;
@@ -5,7 +8,7 @@ export interface Projeto {
   stack: string[];
   repo: string;
   demo?: string;
-  imagem: string;
+  imagem: ImageMetadata; // importar de src/assets: caminho errado quebra o build
   destaque?: string; // resultado concreto
 }
 
@@ -20,7 +23,7 @@ export const projetos: Projeto[] = [
     stack: ["Next.js 15", "TypeScript", "Supabase", "PostgreSQL + pgvector", "Python"],
     repo: "https://github.com/yLich-hub/Jesbick",
     demo: "https://jesbick.vercel.app/login",
-    imagem: "/images/projetos/jesbick.png",
+    imagem: jesbick,
     destaque: "Corpus jurídico limpo e auditado: 1.632 embeddings, busca híbrida verificada",
   },
 ];

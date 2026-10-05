@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import type { Projeto } from "../data/projetos";
 
 interface Props {
@@ -8,18 +9,18 @@ interface Props {
 const { projeto } = Astro.props;
 ---
 
-<article class="grid overflow-hidden rounded-(--radius) border md:grid-cols-2" style="border-color: var(--border); background: var(--bg-elevated);">
-  <img
+<article class="grid grid-cols-1 overflow-hidden rounded-(--radius) border md:grid-cols-2" style="border-color: var(--border); background: var(--bg-elevated);">
+  <Image
     src={projeto.imagem}
     alt={`Captura de tela do projeto ${projeto.nome}`}
-    width="1200"
-    height="750"
+    widths={[600, 1200]}
+    sizes="(min-width: 768px) 50vw, 100vw"
     loading="lazy"
     class="h-full w-full object-cover"
     style="background: var(--bg);"
   />
   <div class="flex flex-col gap-4 p-6 md:p-8">
-    <h3 class="font-black uppercase tracking-tight" style="font-family: var(--font-display); font-size: var(--step-1);">
+    <h3 class="font-black uppercase tracking-tight wrap-break-word" style="font-family: var(--font-display); font-size: var(--step-1);">
       {projeto.nome}
     </h3>
     <p style="color: var(--fg-muted); font-size: var(--step-0); line-height: 1.6;">

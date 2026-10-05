@@ -51,6 +51,7 @@
   --duration-enter: 500ms;
   --duration-fade:  200ms; /* entradas no reduced-motion */
   --stagger:        60ms;
+  --marquee-ritmo:  0.165s; /* por caractere; mantém a velocidade de ~25s da stack original */
 }
 
 /* transições padrão do Tailwind (transition-colors, transition-opacity…) leem os tokens */

@@ -2,46 +2,52 @@
 import { experiencias, formacoes } from "../data/experiencia";
 ---
 
-<section id="experiencia" class="px-4 md:px-6" style="padding-block: var(--space-section);">
-  <div class="mx-auto grid max-w-6xl gap-14 md:grid-cols-2">
-    <div>
-      <h2 class="mb-10 font-black uppercase tracking-tight" style="font-family: var(--font-display); font-size: var(--step-2);">
-        Experiência
-      </h2>
-      <ol class="flex flex-col gap-8 border-l pl-6" style="border-color: var(--border);">
-        {experiencias.map((exp) => (
-          <li class="relative">
-            <span class="absolute -left-[1.85rem] top-1.5 block h-2.5 w-2.5 rounded-full" style="background: var(--accent);"></span>
-            <h3 class="font-bold" style="font-size: var(--step-0);">{exp.cargo}</h3>
-            <p style="font-family: var(--font-mono); font-size: var(--step--1); color: var(--fg-muted);">
-              {exp.empresa}{exp.periodo && ` · ${exp.periodo}`}
-            </p>
-            {exp.bullets && exp.bullets.length > 0 && (
-              <ul class="mt-3 flex list-disc flex-col gap-1.5 pl-4" style="font-size: var(--step--1); color: var(--fg-muted);">
-                {exp.bullets.map((b) => <li>{b}</li>)}
-              </ul>
-            )}
-          </li>
-        ))}
-      </ol>
-    </div>
+{(experiencias.length > 0 || formacoes.length > 0) && (
+  <section id="experiencia" class="px-4 md:px-6" style="padding-block: var(--space-section);">
+    <div class="mx-auto grid max-w-6xl gap-14 md:grid-cols-2">
+      {experiencias.length > 0 && (
+        <div>
+          <h2 class="mb-10 font-black uppercase tracking-tight" style="font-family: var(--font-display); font-size: var(--step-2);">
+            Experiência
+          </h2>
+          <ol class="flex flex-col gap-8 border-l pl-6" style="border-color: var(--border);">
+            {experiencias.map((exp) => (
+              <li class="relative">
+                <span class="absolute -left-[1.85rem] top-1.5 block h-2.5 w-2.5 rounded-full" style="background: var(--accent);"></span>
+                <h3 class="font-bold" style="font-size: var(--step-0);">{exp.cargo}</h3>
+                <p style="font-family: var(--font-mono); font-size: var(--step--1); color: var(--fg-muted);">
+                  {exp.empresa}{exp.periodo && ` · ${exp.periodo}`}
+                </p>
+                {exp.bullets && exp.bullets.length > 0 && (
+                  <ul class="mt-3 flex list-disc flex-col gap-1.5 pl-4" style="font-size: var(--step--1); color: var(--fg-muted);">
+                    {exp.bullets.map((b) => <li>{b}</li>)}
+                  </ul>
+                )}
+              </li>
+            ))}
+          </ol>
+        </div>
+      )}
 
-    <div>
-      <h2 class="mb-10 font-black uppercase tracking-tight" style="font-family: var(--font-display); font-size: var(--step-2);">
-        Formação
-      </h2>
-      <ul class="flex flex-col gap-6">
-        {formacoes.map((f) => (
-          <li class="rounded-(--radius) border p-6" style="border-color: var(--border); background: var(--bg-elevated);">
-            <h3 class="font-bold" style="font-size: var(--step-0);">{f.curso}</h3>
-            {(f.instituicao || f.ano) && (
-              <p style="font-family: var(--font-mono); font-size: var(--step--1); color: var(--fg-muted);">
-                {[f.instituicao, f.ano].filter(Boolean).join(" · ")}
-              </p>
-            )}
-          </li>
-        ))}
-      </ul>
+      {formacoes.length > 0 && (
+        <div>
+          <h2 class="mb-10 font-black uppercase tracking-tight" style="font-family: var(--font-display); font-size: var(--step-2);">
+            Formação
+          </h2>
+          <ul class="flex flex-col gap-6">
+            {formacoes.map((f) => (
+              <li class="rounded-(--radius) border p-6" style="border-color: var(--border); background: var(--bg-elevated);">
+                <h3 class="font-bold" style="font-size: var(--step-0);">{f.curso}</h3>
+                {(f.instituicao || f.ano) && (
+                  <p style="font-family: var(--font-mono); font-size: var(--step--1); color: var(--fg-muted);">
+                    {[f.instituicao, f.ano].filter(Boolean).join(" · ")}
+                  </p>
+                )}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
-  </div>
-</section>
+  </section>
+)}

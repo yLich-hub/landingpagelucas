@@ -2,33 +2,45 @@
 import { stack } from "../data/stack";
 
 const itens = stack.flatMap((g) => g.itens).filter((i) => !i.startsWith("PREENCHER"));
-const conteudo = itens.length > 0 ? itens : ["Astro", "Tailwind", "TypeScript"];
+
+// tamanho de uma cópia em "unidades": caracteres + ~3 pelo ponto e espaçamentos
+const unidades = (lista: string[]) => lista.reduce((t, i) => t + i.length + 3, 0);
+
+// repete a lista até uma cópia cobrir telas largas (~120 unidades ≈ 2600px no desktop)
+let conteudo = itens;
+while (itens.length > 0 && unidades(conteudo) < 120) conteudo = conteudo.concat(itens);
+
+// duração proporcional ao conteúdo = velocidade constante, com 3 ou 30 itens
+const totalUnidades = unidades(conteudo);
 ---
 
-<div class="marquee overflow-hidden border-y py-4" style="border-color: var(--border);" aria-hidden="true">
-  <div class="marquee-track flex w-max gap-8">
-    {[0, 1].map(() => (
-      <ul class="flex shrink-0 items-center gap-8 pr-8 font-bold uppercase" style="font-family: var(--font-display); font-size: var(--step-1); color: var(--fg-muted);">
-        {conteudo.map((item) => (
-          <>
-            <li>{item}</li>
-            <li style="color: var(--accent);">·</li>
-          </>
-        ))}
-      </ul>
-    ))}
+{conteudo.length > 0 && (
+  <div class="marquee overflow-hidden border-y py-4" style="border-color: var(--border);" aria-hidden="true">
+    <div class="marquee-track flex w-max" style={`--marquee-unidades: ${totalUnidades};`}>
+      {[0, 1].map(() => (
+        <ul class="flex shrink-0 items-center gap-8 pr-8 font-bold uppercase" style="font-family: var(--font-display); font-size: var(--step-1); color: var(--fg-muted);">
+          {conteudo.map((item) => (
+            <>
+              <li>{item}</li>
+              <li style="color: var(--accent);">·</li>
+            </>
+          ))}
+        </ul>
+      ))}
+    </div>
   </div>
-</div>
+)}
 
 <style>
   .marquee-track {
-    animation: marquee 25s linear infinite;
+    animation: marquee calc(var(--marquee-unidades) * var(--marquee-ritmo)) linear infinite;
   }
   @media (hover: hover) and (pointer: fine) {
     .marquee:hover .marquee-track {
       animation-play-state: paused;
     }
   }
+  /* -50% = exatamente uma cópia, porque o espaçamento entre cópias é o pr-8 de cada ul */
   @keyframes marquee {
     from { transform: translateX(0); }
     to   { transform: translateX(-50%); }

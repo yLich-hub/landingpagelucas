@@ -1,5 +1,7 @@
 ---
 import { perfil } from "../data/perfil";
+import { stack } from "../data/stack";
+import { projetos } from "../data/projetos";
 ---
 
 <header class="fixed inset-x-0 top-0 z-50 border-b" style="border-color: var(--border); background: color-mix(in srgb, var(--bg) 85%, transparent); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);">
@@ -11,8 +13,8 @@ import { perfil } from "../data/perfil";
     <!-- âncoras: escondidas no mobile (página única, rolagem curta); sem JS de menu -->
     <ul class="hidden items-center gap-6 md:flex" style="color: var(--fg-muted); font-size: var(--step--1);">
       <li><a href="#sobre" class="transition-colors hover:text-(--fg) active:text-(--fg)">Sobre</a></li>
-      <li><a href="#stack" class="transition-colors hover:text-(--fg) active:text-(--fg)">Stack</a></li>
-      <li><a href="#projetos" class="transition-colors hover:text-(--fg) active:text-(--fg)">Projetos</a></li>
+      {stack.length > 0 && <li><a href="#stack" class="transition-colors hover:text-(--fg) active:text-(--fg)">Stack</a></li>}
+      {projetos.length > 0 && <li><a href="#projetos" class="transition-colors hover:text-(--fg) active:text-(--fg)">Projetos</a></li>}
       <li><a href="#contato" class="transition-colors hover:text-(--fg) active:text-(--fg)">Contato</a></li>
     </ul>
 

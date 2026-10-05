@@ -2,26 +2,28 @@
 import { stack } from "../data/stack";
 ---
 
-<section id="stack" class="px-4 md:px-6" style="padding-block: var(--space-section);">
-  <div class="mx-auto max-w-6xl">
-    <h2 class="mb-10 font-black uppercase tracking-tight" style="font-family: var(--font-display); font-size: var(--step-2);">
-      Stack
-    </h2>
-    <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-      {stack.map((g) => (
-        <div class="rounded-(--radius) border p-6" style="border-color: var(--border); background: var(--bg-elevated);">
-          <h3 class="mb-4 font-medium" style="font-family: var(--font-mono); font-size: var(--step--1); color: var(--accent);">
-            {g.grupo}
-          </h3>
-          <ul class="flex flex-wrap gap-2">
-            {g.itens.map((item) => (
-              <li class="rounded-(--radius) border px-2.5 py-1" style="border-color: var(--border); font-size: var(--step--1); color: var(--fg-muted);">
-                {item}
-              </li>
-            ))}
-          </ul>
-        </div>
-      ))}
+{stack.length > 0 && (
+  <section id="stack" class="px-4 md:px-6" style="padding-block: var(--space-section);">
+    <div class="mx-auto max-w-6xl">
+      <h2 class="mb-10 font-black uppercase tracking-tight" style="font-family: var(--font-display); font-size: var(--step-2);">
+        Stack
+      </h2>
+      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {stack.map((g) => (
+          <div class="rounded-(--radius) border p-6" style="border-color: var(--border); background: var(--bg-elevated);">
+            <h3 class="mb-4 font-medium" style="font-family: var(--font-mono); font-size: var(--step--1); color: var(--accent);">
+              {g.grupo}
+            </h3>
+            <ul class="flex flex-wrap gap-2">
+              {g.itens.map((item) => (
+                <li class="rounded-(--radius) border px-2.5 py-1" style="border-color: var(--border); font-size: var(--step--1); color: var(--fg-muted);">
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
     </div>
-  </div>
-</section>
+  </section>
+)}
