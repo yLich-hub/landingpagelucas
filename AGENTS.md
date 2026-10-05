@@ -32,6 +32,9 @@ GitHub, LinkedIn e projetos.
 - Contraste mínimo 4.5:1 em texto.
 - Toda imagem com `alt`, `width`, `height` e `loading="lazy"` abaixo da dobra.
 - `prefers-reduced-motion` respeitado em qualquer animação.
+- Animações só com CSS (transitions, keyframes, scroll-driven) ou Web Animations
+  API. Nunca Framer Motion, GSAP ou outra lib de animação. Animar só `transform`
+  e `opacity`; curvas e durações vêm de tokens no `global.css`.
 - Links externos: `target="_blank" rel="noopener noreferrer"`.
 - Nenhum JS no cliente sem necessidade real (sem `client:*` desnecessário).
 - Sem dependência nova sem eu aprovar antes.
