@@ -16,7 +16,7 @@ import { textos } from "../data/textos";
               <li class="relative">
                 <span class="absolute -left-[1.85rem] top-1.5 block h-2.5 w-2.5 rounded-full" style="background: var(--accent);"></span>
                 <h3 class="font-bold" style="font-size: var(--step-0);">{exp.cargo}</h3>
-                <p style="font-family: var(--font-mono); font-size: var(--step--1); color: var(--fg-muted);">
+                <p class="fonte-original" style="font-family: var(--font-mono); font-size: var(--step--1); color: var(--fg-muted);">
                   {exp.empresa}{exp.periodo && ` · ${exp.periodo}`}
                 </p>
                 {exp.bullets && exp.bullets.length > 0 && (
@@ -40,7 +40,7 @@ import { textos } from "../data/textos";
               <li class="rounded-(--radius) border p-6" style="border-color: var(--border); background: var(--bg-elevated);">
                 <h3 class="font-bold" style="font-size: var(--step-0);">{f.curso}</h3>
                 {(f.instituicao || f.ano) && (
-                  <p style="font-family: var(--font-mono); font-size: var(--step--1); color: var(--fg-muted);">
+                  <p class="fonte-original" style="font-family: var(--font-mono); font-size: var(--step--1); color: var(--fg-muted);">
                     {[f.instituicao, f.ano].filter(Boolean).join(" · ")}
                   </p>
                 )}

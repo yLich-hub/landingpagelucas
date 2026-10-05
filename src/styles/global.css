@@ -13,6 +13,12 @@
   font-weight: 100 900;
   font-display: swap;
 }
+@font-face {
+  font-family: "Silkscreen";
+  src: url("/fonts/silkscreen-latin.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
+}
 
 :root {
   /* superfícies */
@@ -32,6 +38,8 @@
   --font-display: "Archivo", sans-serif;
   --font-body:    "Inter", system-ui, sans-serif;
   --font-mono:    "JetBrains Mono", monospace;
+  --font-pixel:   "Silkscreen", monospace; /* só rótulos curtos e botões, nunca texto corrido */
+  --step-pixel:   1rem; /* fixo: o grid da Silkscreen é de 8px, fora de múltiplos o pixel borra */
 
   /* escala de tipo (clamp = responsivo sem media query) */
   --step--1: clamp(0.83rem, 0.8rem + 0.15vw, 0.9rem);
@@ -40,9 +48,23 @@
   --step-2:  clamp(2rem, 1.5rem + 2.5vw, 3.5rem);
   --step-3:  clamp(3rem, 2rem + 6vw, 8rem);
 
+  /* PROTÓTIPO PIXEL: guarda os valores originais antes de o body trocar (ver fim do arquivo) */
+  --original-font-display: var(--font-display);
+  --original-font-body:    var(--font-body);
+  --original-font-mono:    var(--font-mono);
+  --original-step--1: var(--step--1);
+  --original-step-0:  var(--step-0);
+  --original-step-1:  var(--step-1);
+  --original-step-2:  var(--step-2);
+  --original-step-3:  var(--step-3);
+
   /* espaçamento */
   --space-section: clamp(5rem, 10vw, 10rem);
   --radius: 4px;
+
+  /* estilo pixel: borda grossa + sombra dura (deslocada, sem desfoque) */
+  --pixel-borda:  2px;
+  --pixel-sombra: 4px;
 
   /* movimento */
   --ease-out:       cubic-bezier(0.23, 1, 0.32, 1); /* entradas e press */
@@ -51,6 +73,7 @@
   --duration-enter: 500ms;
   --duration-fade:  200ms; /* entradas no reduced-motion */
   --stagger:        60ms;
+  --ease-pixel:     steps(2, end); /* movimento em degraus, sem interpolação suave */
   --marquee-ritmo:  0.165s; /* por caractere; mantém a velocidade de ~25s da stack original */
 }
 
@@ -83,6 +106,70 @@
   }
 }
 
+/* botão pixel: fundo e borda no ::before, sombra dura no ::after.
+   Para não animar box-shadow, o "afundar" é feito só com transform: o botão
+   desce e a sombra sobe na mesma medida, então ela fica parada na tela.
+   Cores por variável: --pixel-fundo, --pixel-cor-borda, --pixel-cor-sombra. */
+@utility pixel-btn {
+  position: relative;
+  isolation: isolate; /* camadas negativas ficam atrás do texto, mas dentro do botão */
+  border-radius: var(--radius);
+  font-family: var(--font-pixel);
+  font-size: var(--step-pixel);
+  line-height: 1;
+  user-select: none;
+  -webkit-user-select: none;
+  transition: transform var(--duration-press) var(--ease-pixel);
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+  }
+  &::before {
+    z-index: -1;
+    background: var(--pixel-fundo, var(--bg)); /* opaco: senão a sombra aparece por trás */
+    border: var(--pixel-borda) solid var(--pixel-cor-borda, var(--fg-muted));
+  }
+  &::after {
+    z-index: -2;
+    background: var(--pixel-cor-sombra, var(--border));
+    transform: translate(var(--pixel-sombra), var(--pixel-sombra));
+    transition: transform var(--duration-press) var(--ease-pixel);
+  }
+
+  /* hover levanta 2px (só onde existe hover de verdade, nada de hover preso no toque) */
+  @media (hover: hover) {
+    &:hover {
+      transform: translate(-2px, -2px);
+    }
+    &:hover::after {
+      transform: translate(calc(var(--pixel-sombra) + 2px), calc(var(--pixel-sombra) + 2px));
+    }
+  }
+  /* pressionado: pousa em cima da sombra */
+  &:active {
+    transform: translate(var(--pixel-sombra), var(--pixel-sombra));
+  }
+  &:active::after {
+    transform: translate(0, 0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    &,
+    &:hover,
+    &:active {
+      transform: none;
+    }
+    &:hover::after,
+    &:active::after {
+      transform: translate(var(--pixel-sombra), var(--pixel-sombra));
+    }
+  }
+}
+
 html {
   background: var(--bg);
   color: var(--fg);
@@ -99,4 +186,35 @@ a, button {
    trata o próprio caso no componente (ver Marquee.astro). */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
+}
+
+/* PROTÓTIPO PIXEL — tudo em Silkscreen, menos o que tiver .fonte-original.
+   Para desfazer: apagar este bloco, as linhas --original-* do :root e as
+   classes fonte-original nos componentes. */
+body {
+  --font-display: var(--font-pixel);
+  --font-body:    var(--font-pixel);
+  --font-mono:    var(--font-pixel);
+  /* escala presa a múltiplos de 8px (grid da Silkscreen) para o pixel não borrar;
+     navegador sem round() ignora estas linhas e fica com o clamp original */
+  --step--1: round(var(--original-step--1), 8px);
+  --step-0:  round(var(--original-step-0), 8px);
+  --step-1:  round(var(--original-step-1), 8px);
+  --step-2:  round(var(--original-step-2), 8px);
+  --step-3:  round(var(--original-step-3), 8px);
+  font-family: var(--font-body);
+  font-synthesis: none; /* Silkscreen só tem peso 400; negrito falso borra o pixel */
+}
+/* texto de leitura volta para a tipografia de antes (fonte e tamanho) */
+.fonte-original {
+  --font-display: var(--original-font-display);
+  --font-body:    var(--original-font-body);
+  --font-mono:    var(--original-font-mono);
+  --step--1: var(--original-step--1);
+  --step-0:  var(--original-step-0);
+  --step-1:  var(--original-step-1);
+  --step-2:  var(--original-step-2);
+  --step-3:  var(--original-step-3);
+  font-family: var(--font-body);
+  font-synthesis: initial;
 }

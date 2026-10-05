@@ -6,7 +6,7 @@ import { textos } from "../data/textos";
 
 <section id="topo" class="flex min-h-svh flex-col justify-center px-4 pt-20 md:px-6">
   <div class="mx-auto w-full max-w-6xl">
-    <p class="hero-enter mb-4 font-medium" style="--i: 0; font-family: var(--font-mono); font-size: var(--step--1); color: var(--accent);">
+    <p class="hero-enter mb-4" style="--i: 0; font-family: var(--font-pixel); font-size: var(--step-pixel); color: var(--accent);">
       {perfil.cargo} · {perfil.cidade}
     </p>
 
@@ -14,7 +14,7 @@ import { textos } from "../data/textos";
       {perfil.nome}
     </h1>
 
-    <p class="hero-enter mt-6 max-w-2xl" style="--i: 2; font-size: var(--step-1); color: var(--fg-muted);">
+    <p class="hero-enter fonte-original mt-6 max-w-2xl" style="--i: 2; font-size: var(--step-1); color: var(--fg-muted);">
       {perfil.posicionamento}
     </p>
 
@@ -22,8 +22,8 @@ import { textos } from "../data/textos";
       {projetos.length > 0 && (
         <a
           href="#projetos"
-          class="rounded-(--radius) px-6 py-3 font-medium pressable hover:opacity-85"
-          style="background: var(--accent); color: var(--bg);"
+          class="pixel-btn px-6 py-4"
+          style="--pixel-fundo: var(--accent); --pixel-cor-borda: var(--accent); --pixel-cor-sombra: var(--accent-dim); color: var(--bg);"
         >
           {textos.botoes.verProjetos}
         </a>
@@ -31,8 +31,8 @@ import { textos } from "../data/textos";
       <a
         href={perfil.curriculoPdf}
         download
-        class="rounded-(--radius) border px-6 py-3 font-medium pressable hover:border-(--fg-muted)"
-        style="border-color: var(--border); color: var(--fg);"
+        class="pixel-btn px-6 py-4"
+        style="color: var(--fg);"
       >
         {textos.botoes.baixarCurriculo}
       </a>
