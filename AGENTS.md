@@ -24,9 +24,17 @@ GitHub, LinkedIn e projetos.
 - Fundo: `--bg` #0B0B0F | Elevado: `--bg-elevated` #14141B
 - Texto: `--fg` #F2F2F5 | Secundário: `--fg-muted` #8A8A9A
 - Acento: `--accent` #FBBF24 (âmbar quente) — usado com parcimônia, é o único ponto de cor
-- Display: Archivo | Corpo: Inter | Mono: JetBrains Mono (a confirmar)
-- Escala de tipo com `clamp()`, sem media query para tamanho de fonte
-- Raio de borda: 4px. Sem sombra difusa; separação por borda de 1px.
+- Fonte padrão: Silkscreen (pixel, `--font-pixel`) — títulos, nav, rótulos, botões,
+  marquee. Os tokens `--font-display`, `--font-body` e `--font-mono` apontam para ela.
+- Texto de leitura (parágrafos, tags, subtítulos, e-mail, nome de projeto) usa a
+  classe `texto-leitura`, que troca para Archivo (display), Inter (corpo) e
+  JetBrains Mono (mono, a confirmar). Nunca texto corrido em Silkscreen.
+- Escala de tipo com `clamp()` (`--fluido-*`), sem media query para tamanho de fonte.
+  Os `--step-*` arredondam para múltiplos de 8px (grid da Silkscreen);
+  `texto-leitura` usa a escala fluida sem arredondar.
+- Raio de borda: 4px. Sem sombra difusa. Cards e divisórias: borda de 1px.
+  Botões no estilo pixel: utilitário `pixel-btn` (borda de 2px + sombra dura
+  deslocada, sem desfoque).
 
 ## Regras obrigatórias
 - Mobile-first. Todo componente tem que funcionar em 375px.

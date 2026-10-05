@@ -34,29 +34,29 @@
   --accent:      #FBBF24;
   --accent-dim:  #B38A1D;
 
-  /* tipografia */
-  --font-display: "Archivo", sans-serif;
-  --font-body:    "Inter", system-ui, sans-serif;
-  --font-mono:    "JetBrains Mono", monospace;
-  --font-pixel:   "Silkscreen", monospace; /* só rótulos curtos e botões, nunca texto corrido */
+  /* tipografia: Silkscreen (pixel) é o padrão — títulos, nav, rótulos, botões.
+     Texto de leitura usa as fontes --leitura-* via .texto-leitura (fim do arquivo). */
+  --font-pixel:   "Silkscreen", monospace;
+  --leitura-display: "Archivo", sans-serif;
+  --leitura-body:    "Inter", system-ui, sans-serif;
+  --leitura-mono:    "JetBrains Mono", monospace;
+  --font-display: var(--font-pixel);
+  --font-body:    var(--font-pixel);
+  --font-mono:    var(--font-pixel);
   --step-pixel:   1rem; /* fixo: o grid da Silkscreen é de 8px, fora de múltiplos o pixel borra */
 
-  /* escala de tipo (clamp = responsivo sem media query) */
-  --step--1: clamp(0.83rem, 0.8rem + 0.15vw, 0.9rem);
-  --step-0:  clamp(1rem, 0.95rem + 0.25vw, 1.13rem);
-  --step-1:  clamp(1.4rem, 1.2rem + 1vw, 2rem);
-  --step-2:  clamp(2rem, 1.5rem + 2.5vw, 3.5rem);
-  --step-3:  clamp(3rem, 2rem + 6vw, 8rem);
-
-  /* PROTÓTIPO PIXEL: guarda os valores originais antes de o body trocar (ver fim do arquivo) */
-  --original-font-display: var(--font-display);
-  --original-font-body:    var(--font-body);
-  --original-font-mono:    var(--font-mono);
-  --original-step--1: var(--step--1);
-  --original-step-0:  var(--step-0);
-  --original-step-1:  var(--step-1);
-  --original-step-2:  var(--step-2);
-  --original-step-3:  var(--step-3);
+  /* escala de tipo fluida (clamp = responsivo sem media query) */
+  --fluido--1: clamp(0.83rem, 0.8rem + 0.15vw, 0.9rem);
+  --fluido-0:  clamp(1rem, 0.95rem + 0.25vw, 1.13rem);
+  --fluido-1:  clamp(1.4rem, 1.2rem + 1vw, 2rem);
+  --fluido-2:  clamp(2rem, 1.5rem + 2.5vw, 3.5rem);
+  --fluido-3:  clamp(3rem, 2rem + 6vw, 8rem);
+  /* escala usada nos componentes; presa a 8px logo abaixo, onde há round() */
+  --step--1: var(--fluido--1);
+  --step-0:  var(--fluido-0);
+  --step-1:  var(--fluido-1);
+  --step-2:  var(--fluido-2);
+  --step-3:  var(--fluido-3);
 
   /* espaçamento */
   --space-section: clamp(5rem, 10vw, 10rem);
@@ -75,6 +75,19 @@
   --stagger:        60ms;
   --ease-pixel:     steps(2, end); /* movimento em degraus, sem interpolação suave */
   --marquee-ritmo:  0.165s; /* por caractere; mantém a velocidade de ~25s da stack original */
+}
+
+/* escala presa a múltiplos de 8px para o pixel da Silkscreen não borrar.
+   Fica em @supports porque variável CSS aceita qualquer valor: sem a guarda,
+   navegador sem round() ficaria com font-size inválido em vez do clamp. */
+@supports (width: round(1px, 1px)) {
+  :root {
+    --step--1: round(var(--fluido--1), 8px);
+    --step-0:  round(var(--fluido-0), 8px);
+    --step-1:  round(var(--fluido-1), 8px);
+    --step-2:  round(var(--fluido-2), 8px);
+    --step-3:  round(var(--fluido-3), 8px);
+  }
 }
 
 /* transições padrão do Tailwind (transition-colors, transition-opacity…) leem os tokens */
@@ -174,6 +187,7 @@ html {
   background: var(--bg);
   color: var(--fg);
   font-family: var(--font-body);
+  font-synthesis: none; /* Silkscreen só tem peso 400; negrito falso borra o pixel */
   scroll-behavior: smooth;
 }
 
@@ -188,33 +202,18 @@ a, button {
   html { scroll-behavior: auto; }
 }
 
-/* PROTÓTIPO PIXEL — tudo em Silkscreen, menos o que tiver .fonte-original.
-   Para desfazer: apagar este bloco, as linhas --original-* do :root e as
-   classes fonte-original nos componentes. */
-body {
-  --font-display: var(--font-pixel);
-  --font-body:    var(--font-pixel);
-  --font-mono:    var(--font-pixel);
-  /* escala presa a múltiplos de 8px (grid da Silkscreen) para o pixel não borrar;
-     navegador sem round() ignora estas linhas e fica com o clamp original */
-  --step--1: round(var(--original-step--1), 8px);
-  --step-0:  round(var(--original-step-0), 8px);
-  --step-1:  round(var(--original-step-1), 8px);
-  --step-2:  round(var(--original-step-2), 8px);
-  --step-3:  round(var(--original-step-3), 8px);
-  font-family: var(--font-body);
-  font-synthesis: none; /* Silkscreen só tem peso 400; negrito falso borra o pixel */
-}
-/* texto de leitura volta para a tipografia de antes (fonte e tamanho) */
-.fonte-original {
-  --font-display: var(--original-font-display);
-  --font-body:    var(--original-font-body);
-  --font-mono:    var(--original-font-mono);
-  --step--1: var(--original-step--1);
-  --step-0:  var(--original-step-0);
-  --step-1:  var(--original-step-1);
-  --step-2:  var(--original-step-2);
-  --step-3:  var(--original-step-3);
+/* texto de leitura (parágrafos, tags, subtítulos, e-mail): fontes de leitura
+   e escala fluida sem arredondar. Redefine os tokens no elemento, então os
+   estilos inline que leem var(--font-*) e var(--step-*) seguem funcionando. */
+.texto-leitura {
+  --font-display: var(--leitura-display);
+  --font-body:    var(--leitura-body);
+  --font-mono:    var(--leitura-mono);
+  --step--1: var(--fluido--1);
+  --step-0:  var(--fluido-0);
+  --step-1:  var(--fluido-1);
+  --step-2:  var(--fluido-2);
+  --step-3:  var(--fluido-3);
   font-family: var(--font-body);
   font-synthesis: initial;
 }
