@@ -1,5 +1,6 @@
 ---
 import { perfil } from "../data/perfil";
+import { textos } from "../data/textos";
 
 const ano = new Date().getFullYear();
 ---
@@ -8,10 +9,10 @@ const ano = new Date().getFullYear();
   <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 sm:flex-row" style="font-size: var(--step--1); color: var(--fg-muted);">
     <p>© {ano} {perfil.nome}</p>
     <ul class="flex items-center gap-5">
-      <li><a href={perfil.github} target="_blank" rel="noopener noreferrer" class="transition-colors hover:text-(--fg) active:text-(--fg)">GitHub</a></li>
-      <li><a href={perfil.linkedin} target="_blank" rel="noopener noreferrer" class="transition-colors hover:text-(--fg) active:text-(--fg)">LinkedIn</a></li>
-      <li><a href={`mailto:${perfil.email}`} class="transition-colors hover:text-(--fg) active:text-(--fg)">E-mail</a></li>
-      <li><a href="https://github.com/yLich-hub/landingpagelucas" target="_blank" rel="noopener noreferrer" class="transition-colors hover:text-(--fg) active:text-(--fg)">Código deste site</a></li>
+      <li><a href={perfil.github} target="_blank" rel="noopener noreferrer" class="transition-colors hover:text-(--fg) active:text-(--fg)">{textos.redes.github}</a></li>
+      <li><a href={perfil.linkedin} target="_blank" rel="noopener noreferrer" class="transition-colors hover:text-(--fg) active:text-(--fg)">{textos.redes.linkedin}</a></li>
+      <li><a href={`mailto:${perfil.email}`} class="transition-colors hover:text-(--fg) active:text-(--fg)">{textos.redes.email}</a></li>
+      <li><a href={perfil.repositorioSite} target="_blank" rel="noopener noreferrer" class="transition-colors hover:text-(--fg) active:text-(--fg)">{textos.footer.codigoDoSite}</a></li>
     </ul>
   </div>
 </footer>

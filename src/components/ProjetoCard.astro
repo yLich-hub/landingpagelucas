@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import type { Projeto } from "../data/projetos";
+import { textos } from "../data/textos";
 
 interface Props {
   projeto: Projeto;
@@ -12,7 +13,7 @@ const { projeto } = Astro.props;
 <article class="grid grid-cols-1 overflow-hidden rounded-(--radius) border md:grid-cols-2" style="border-color: var(--border); background: var(--bg-elevated);">
   <Image
     src={projeto.imagem}
-    alt={`Captura de tela do projeto ${projeto.nome}`}
+    alt={textos.alt.projeto(projeto.nome)}
     widths={[600, 1200]}
     sizes="(min-width: 768px) 50vw, 100vw"
     loading="lazy"
@@ -49,7 +50,7 @@ const { projeto } = Astro.props;
         class="rounded-(--radius) border px-4 py-2 font-medium pressable hover:border-(--fg-muted)"
         style="border-color: var(--border); font-size: var(--step--1);"
       >
-        Ver código
+        {textos.botoes.verCodigo}
       </a>
       {projeto.demo && (
         <a
@@ -59,7 +60,7 @@ const { projeto } = Astro.props;
           class="rounded-(--radius) px-4 py-2 font-medium pressable hover:opacity-85"
           style="background: var(--accent); color: var(--bg); font-size: var(--step--1);"
         >
-          Ver ao vivo
+          {textos.botoes.verAoVivo}
         </a>
       )}
     </div>

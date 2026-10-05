@@ -1,12 +1,14 @@
 ---
+import { Image } from "astro:assets";
 import { perfil } from "../data/perfil";
+import { textos } from "../data/textos";
 ---
 
 <section id="sobre" class="px-4 md:px-6" style="padding-block: var(--space-section);">
   <div class="mx-auto grid max-w-6xl items-start gap-10 md:grid-cols-[2fr_1fr]">
     <div>
       <h2 class="mb-6 font-black uppercase tracking-tight" style="font-family: var(--font-display); font-size: var(--step-2);">
-        Sobre
+        {textos.secoes.sobre}
       </h2>
       <p class="max-w-prose" style="font-size: var(--step-0); color: var(--fg-muted); line-height: 1.7;">
         {perfil.bioMedia}
@@ -15,11 +17,11 @@ import { perfil } from "../data/perfil";
         <span style="color: var(--accent);">▸</span> {perfil.cidade} · {perfil.disponibilidade}
       </p>
     </div>
-    <img
-      src="/images/foto-perfil.jpg"
-      alt={`Foto de ${perfil.nome}`}
-      width="400"
-      height="400"
+    <Image
+      src={perfil.foto}
+      alt={textos.alt.foto(perfil.nome)}
+      widths={[320, 640]}
+      sizes="20rem"
       loading="lazy"
       class="w-full max-w-xs justify-self-center rounded-(--radius) border md:justify-self-end"
       style="border-color: var(--border); background: var(--bg-elevated);"

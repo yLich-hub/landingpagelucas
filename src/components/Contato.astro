@@ -1,14 +1,15 @@
 ---
 import { perfil } from "../data/perfil";
+import { textos } from "../data/textos";
 ---
 
 <section id="contato" class="px-4 text-center md:px-6" style="padding-block: var(--space-section);">
   <div class="mx-auto max-w-4xl">
     <h2 class="font-black uppercase tracking-tight" style="font-family: var(--font-display); font-size: var(--step-2);">
-      Vamos conversar<span style="color: var(--accent);">?</span>
+      {textos.contato.titulo}<span style="color: var(--accent);">?</span>
     </h2>
     <p class="mt-4" style="font-size: var(--step-0); color: var(--fg-muted);">
-      Aberto a oportunidades. O caminho mais rápido é o e-mail:
+      {textos.contato.chamada}
     </p>
     <a
       href={`mailto:${perfil.email}`}
@@ -19,13 +20,13 @@ import { perfil } from "../data/perfil";
     </a>
     <div class="mt-10 flex flex-wrap items-center justify-center gap-4">
       <a href={perfil.curriculoPdf} download class="rounded-(--radius) px-6 py-3 font-medium pressable hover:opacity-85" style="background: var(--accent); color: var(--bg);">
-        Baixar currículo (PDF)
+        {textos.botoes.baixarCurriculo}
       </a>
       <a href={perfil.github} target="_blank" rel="noopener noreferrer" class="rounded-(--radius) border px-6 py-3 font-medium pressable hover:border-(--fg-muted)" style="border-color: var(--border);">
-        GitHub
+        {textos.redes.github}
       </a>
       <a href={perfil.linkedin} target="_blank" rel="noopener noreferrer" class="rounded-(--radius) border px-6 py-3 font-medium pressable hover:border-(--fg-muted)" style="border-color: var(--border);">
-        LinkedIn
+        {textos.redes.linkedin}
       </a>
     </div>
   </div>

@@ -1,5 +1,6 @@
 ---
 import { experiencias, formacoes } from "../data/experiencia";
+import { textos } from "../data/textos";
 ---
 
 {(experiencias.length > 0 || formacoes.length > 0) && (
@@ -8,7 +9,7 @@ import { experiencias, formacoes } from "../data/experiencia";
       {experiencias.length > 0 && (
         <div>
           <h2 class="mb-10 font-black uppercase tracking-tight" style="font-family: var(--font-display); font-size: var(--step-2);">
-            Experiência
+            {textos.secoes.experiencia}
           </h2>
           <ol class="flex flex-col gap-8 border-l pl-6" style="border-color: var(--border);">
             {experiencias.map((exp) => (
@@ -32,7 +33,7 @@ import { experiencias, formacoes } from "../data/experiencia";
       {formacoes.length > 0 && (
         <div>
           <h2 class="mb-10 font-black uppercase tracking-tight" style="font-family: var(--font-display); font-size: var(--step-2);">
-            Formação
+            {textos.secoes.formacao}
           </h2>
           <ul class="flex flex-col gap-6">
             {formacoes.map((f) => (
