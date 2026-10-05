@@ -19,6 +19,7 @@ export const textos = {
     baixarCurriculo: "Baixar currículo (PDF)",
     verCodigo: "Ver código",
     verAoVivo: "Ver ao vivo",
+    baixarDiploma: "Baixar diploma (PDF)",
   },
   redes: {
     github: "GitHub",

@@ -9,6 +9,7 @@ export interface Formacao {
   curso: string;
   instituicao?: string;
   ano?: string;
+  diploma?: string; // PDF em public/; vazio = sem botão de download
 }
 
 export const experiencias: Experiencia[] = [
@@ -21,8 +22,9 @@ export const experiencias: Experiencia[] = [
     empresa: "Escola de Idiomas Wizard",
   },
   {
-    cargo: "Analista de Vendas",
+    cargo: "Pós-Vendas",
     empresa: "Certto Telecom",
+    periodo: "2023 — 2026",
   },
 ];
 
@@ -33,5 +35,8 @@ export const formacoes: Formacao[] = [
   },
   {
     curso: "Bacharelado em Administração",
+    instituicao: "FAG — Centro Universitário da Fundação Assis Gurgacz",
+    // cópia com RG e data de nascimento tarjados; o original nunca vai para public/
+    diploma: "/diploma-administracao.pdf",
   },
 ];

@@ -3,7 +3,7 @@ export interface GrupoStack {
   itens: string[];
 }
 
-// ⚠️ Pré-preenchido com base no projeto Jesbick e neste site.
+// ⚠️ Pré-preenchido com base no projeto Ipsis e neste site.
 // Edite à vontade — regra do guia: só o que você defenderia numa entrevista.
 export const stack: GrupoStack[] = [
   { grupo: "Linguagens", itens: ["TypeScript", "JavaScript", "Python", "SQL"] },

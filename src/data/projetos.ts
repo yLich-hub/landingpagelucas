@@ -1,5 +1,5 @@
 import type { ImageMetadata } from "astro";
-import jesbick from "../assets/projetos/jesbick.png";
+import ipsis from "../assets/projetos/ipsis.png";
 
 export interface Projeto {
   nome: string;
@@ -15,15 +15,15 @@ export interface Projeto {
 // Estrutura da copy: Problema → O que eu construí → Stack → Resultado
 export const projetos: Projeto[] = [
   {
-    nome: "Jesbick",
+    nome: "Ipsis",
     descricao:
-      "Construí uma busca híbrida sobre a Lei 11.343/2006 e o Código Penal, com geração de resposta à acusação em que toda citação resolve para o texto lido do banco — nunca para texto gerado pelo modelo.",
+      "Construí um sistema de consulta e geração de peças para advocacia criminal, no recorte de tráfico de drogas. A busca híbrida funde rubrica, texto e semântica sobre a Lei 11.343/2006, o Código Penal e o CPP; o modelo redige só a argumentação, e toda citação resolve para o texto lido do banco — nunca para texto gerado. A resposta à acusação sai em DOCX, com dosimetria trifásica e precedentes do STJ.",
     problema:
       "Advogado criminalista busca pelo apelido do instituto (“tráfico privilegiado”), que não aparece no texto da lei — e busca semântica sozinha confunde crimes de redação quase idêntica. Citar texto errado em peça protocolada causa dano real ao cliente.",
-    stack: ["Next.js 15", "TypeScript", "Supabase", "PostgreSQL + pgvector", "Python"],
-    repo: "https://github.com/yLich-hub/Jesbick",
-    demo: "https://jesbick.vercel.app/login",
-    imagem: jesbick,
-    destaque: "Corpus jurídico limpo e auditado: 1.632 embeddings, busca híbrida verificada",
+    stack: ["Next.js 15", "TypeScript", "Supabase", "PostgreSQL + pgvector", "OpenAI", "Python", "Tailwind CSS", "Vitest + Playwright"],
+    repo: "https://github.com/yLich-hub/Ipsis",
+    // sem demo: o sistema está fechado para novos cadastros
+    imagem: ipsis,
+    destaque: "Corpus conferido contra o Planalto: 1.340 artigos e 3.771 dispositivos com vetor · 249 verificações automáticas em todo push",
   },
 ];

@@ -8,8 +8,13 @@ export const perfil = {
     "Em transição da administração para o desenvolvimento de software. Primeiro projeto full-stack no ar: pesquisa jurídica com busca híbrida, em Next.js, TypeScript e Postgres.",
   bioCurta:
     "Estudante de Engenharia de Software na FAG, em transição da administração para o desenvolvimento. Primeiro projeto full-stack em produção.",
-  bioMedia:
-    "Sou formado em Administração e curso Engenharia de Software na FAG (Centro Universitário da Fundação Assis Gurgacz), em Cascavel — PR. Antes de migrar para a tecnologia, trabalhei com vendas e rotinas administrativas — experiência que me deu disciplina de processo e contato direto com cliente. Hoje aplico isso no código: meu primeiro projeto full-stack, o Jesbick, está no ar, construído com Next.js, TypeScript e Supabase. Busco minha primeira oportunidade profissional em desenvolvimento.",
+  // um item por parágrafo
+  bioMedia: [
+    "Bacharel em administração formado pelo Centro Universitário Assis Gurgacz e com fluidez no idioma inglês (New York School).",
+    "No ano de 2026 iniciei a faculdade de Engenharia de Software pelo Centro Universitário Assis Gurgacz.",
+    "Minha trajetória é marcada pelo foco no atendimento ao cliente e na eficiência operacional. Iniciei minha carreira no CAPS III, onde desenvolvi bases sólidas em rotinas administrativas e recepção. Na sequência, atuei no setor operacional da Wizard, sendo responsável pelo suporte a alunos e responsáveis, além de apoiar a gestão administrativa da unidade.",
+    "Integrei a equipe de Pós-Vendas na Certto no ano de 2023 até 2026. Atuava estrategicamente na retenção e fidelização de clientes, realizando o gerenciamento da base, oferta de upgrades de planos e coleta de feedbacks para melhoria contínua dos serviços. Sou movido por soluções que unam organização administrativa e excelência no relacionamento com o cliente.",
+  ],
   cidade: "Cascavel — PR",
   disponibilidade: "remoto, híbrido ou presencial",
   email: "lucasmacielvieira55@gmail.com",

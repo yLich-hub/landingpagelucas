@@ -10,16 +10,19 @@ interface Props {
 const { projeto } = Astro.props;
 ---
 
-<article class="grid grid-cols-1 overflow-hidden rounded-(--radius) border md:grid-cols-2" style="border-color: var(--border); background: var(--bg-elevated);">
-  <Image
-    src={projeto.imagem}
-    alt={textos.alt.projeto(projeto.nome)}
-    widths={[600, 1200]}
-    sizes="(min-width: 768px) 50vw, 100vw"
-    loading="lazy"
-    class="h-full w-full object-cover"
-    style="background: var(--bg);"
-  />
+<article class="grid grid-cols-1 overflow-hidden rounded-(--radius) border lg:grid-cols-2" style="border-color: var(--border); background: var(--bg-elevated);">
+  <!-- no lg a imagem preenche a coluna sem ditar a altura: quem manda é o texto -->
+  <div class="relative">
+    <Image
+      src={projeto.imagem}
+      alt={textos.alt.projeto(projeto.nome)}
+      widths={[600, 1200]}
+      sizes="(min-width: 1024px) 50vw, 100vw"
+      loading="lazy"
+      class="aspect-16/10 w-full object-cover object-top lg:absolute lg:inset-0 lg:aspect-auto lg:h-full"
+      style="background: var(--bg);"
+    />
+  </div>
   <div class="flex flex-col gap-4 p-6 md:p-8">
     <h3 class="font-black uppercase tracking-tight wrap-break-word" style="font-family: var(--font-display); font-size: var(--step-1);">
       {projeto.nome}
