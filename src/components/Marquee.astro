@@ -24,8 +24,10 @@ const conteudo = itens.length > 0 ? itens : ["Astro", "Tailwind", "TypeScript"];
   .marquee-track {
     animation: marquee 25s linear infinite;
   }
-  .marquee:hover .marquee-track {
-    animation-play-state: paused;
+  @media (hover: hover) and (pointer: fine) {
+    .marquee:hover .marquee-track {
+      animation-play-state: paused;
+    }
   }
   @keyframes marquee {
     from { transform: translateX(0); }

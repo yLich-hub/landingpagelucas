@@ -56,6 +56,26 @@
   --default-transition-timing-function: ease;
 }
 
+/* botões: hover de cor/opacidade + leve "afundar" ao pressionar */
+@utility pressable {
+  transition:
+    color var(--duration-hover) ease,
+    background-color var(--duration-hover) ease,
+    border-color var(--duration-hover) ease,
+    opacity var(--duration-hover) ease,
+    transform var(--duration-press) var(--ease-out);
+
+  &:active {
+    transform: scale(0.97);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    &:active {
+      transform: none;
+    }
+  }
+}
+
 html {
   background: var(--bg);
   color: var(--fg);

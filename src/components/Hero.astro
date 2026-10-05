@@ -19,7 +19,7 @@ import { perfil } from "../data/perfil";
     <div class="mt-10 flex flex-wrap items-center gap-4">
       <a
         href="#projetos"
-        class="rounded-(--radius) px-6 py-3 font-medium transition-opacity hover:opacity-85"
+        class="rounded-(--radius) px-6 py-3 font-medium pressable hover:opacity-85"
         style="background: var(--accent); color: var(--bg);"
       >
         Ver projetos
@@ -27,7 +27,7 @@ import { perfil } from "../data/perfil";
       <a
         href={perfil.curriculoPdf}
         download
-        class="rounded-(--radius) border px-6 py-3 font-medium transition-colors hover:border-(--fg-muted)"
+        class="rounded-(--radius) border px-6 py-3 font-medium pressable hover:border-(--fg-muted)"
         style="border-color: var(--border); color: var(--fg);"
       >
         Baixar currículo (PDF)
