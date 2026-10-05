@@ -4,19 +4,19 @@ import { perfil } from "../data/perfil";
 
 <section id="topo" class="flex min-h-svh flex-col justify-center px-4 pt-20 md:px-6">
   <div class="mx-auto w-full max-w-6xl">
-    <p class="mb-4 font-medium" style="font-family: var(--font-mono); font-size: var(--step--1); color: var(--accent);">
+    <p class="hero-enter mb-4 font-medium" style="--i: 0; font-family: var(--font-mono); font-size: var(--step--1); color: var(--accent);">
       {perfil.cargo} · {perfil.cidade}
     </p>
 
-    <h1 class="font-black uppercase leading-[0.95] tracking-tight" style="font-family: var(--font-display); font-size: var(--step-3);">
+    <h1 class="hero-enter font-black uppercase leading-[0.95] tracking-tight" style="--i: 1; font-family: var(--font-display); font-size: var(--step-3);">
       {perfil.nome}
     </h1>
 
-    <p class="mt-6 max-w-2xl" style="font-size: var(--step-1); color: var(--fg-muted);">
+    <p class="hero-enter mt-6 max-w-2xl" style="--i: 2; font-size: var(--step-1); color: var(--fg-muted);">
       {perfil.posicionamento}
     </p>
 
-    <div class="mt-10 flex flex-wrap items-center gap-4">
+    <div class="hero-enter mt-10 flex flex-wrap items-center gap-4" style="--i: 3;">
       <a
         href="#projetos"
         class="rounded-(--radius) px-6 py-3 font-medium pressable hover:opacity-85"
@@ -35,7 +35,7 @@ import { perfil } from "../data/perfil";
     </div>
 
     {perfil.numeros.length > 0 && (
-      <dl class="mt-16 grid grid-cols-3 gap-4 border-t pt-8" style="border-color: var(--border);">
+      <dl class="hero-enter mt-16 grid grid-cols-3 gap-4 border-t pt-8" style="--i: 4; border-color: var(--border);">
         {perfil.numeros.map((n) => (
           <div>
             <dd class="font-black" style="font-family: var(--font-display); font-size: var(--step-2);">{n.valor}</dd>
@@ -46,3 +46,22 @@ import { perfil } from "../data/perfil";
     )}
   </div>
 </section>
+
+<style>
+  /* entrada do hero: uma vez por visita, escalonada de cima para baixo */
+  .hero-enter {
+    animation: hero-enter var(--duration-enter) var(--ease-out) both;
+    animation-delay: calc(var(--i, 0) * var(--stagger));
+  }
+  @keyframes hero-enter {
+    from { opacity: 0; transform: translateY(12px); }
+  }
+
+  /* reduced-motion: mantém só o fade, sem deslocamento */
+  @media (prefers-reduced-motion: reduce) {
+    .hero-enter { animation-name: hero-fade; }
+  }
+  @keyframes hero-fade {
+    from { opacity: 0; }
+  }
+</style>
