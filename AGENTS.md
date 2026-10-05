@@ -12,11 +12,13 @@ GitHub, LinkedIn e projetos.
 - Deploy: Vercel
 
 ## Estrutura
-- `src/data/` — TODO o conteúdo (perfil, projetos, stack, experiência). Editar aqui,
-  nunca hardcodar texto em componente.
+- `src/data/` — TODO o conteúdo (perfil, projetos, stack, experiência) e os textos
+  da interface (`textos.ts`). Editar aqui, nunca hardcodar texto em componente.
 - `src/components/` — um componente por seção
 - `src/styles/global.css` — tokens de design em variáveis CSS
-- `public/` — CV em PDF, imagens, favicon
+- `src/assets/` — imagens (foto, projetos), importadas em `src/data/` e renderizadas
+  com `<Image>` de `astro:assets`
+- `public/` — CV em PDF, og-image, favicon, fontes
 
 ## Design system
 - Fundo: `--bg` #0B0B0F | Elevado: `--bg-elevated` #14141B

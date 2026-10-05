@@ -14,11 +14,14 @@ eu sou; em 60, ter acesso a CV, GitHub, LinkedIn e projetos.
 
 ## Estrutura
 
-- `src/data/` — todo o conteúdo (perfil, projetos, stack, experiência). Para
-  atualizar o site, edita-se aqui, não nos componentes.
+- `src/data/` — todo o conteúdo (perfil, projetos, stack, experiência) e os
+  textos da interface (`textos.ts`). Para atualizar o site, edita-se aqui, não
+  nos componentes.
 - `src/components/` — um componente por seção
 - `src/styles/global.css` — design tokens em variáveis CSS
-- `public/` — CV em PDF, imagens e fontes auto-hospedadas
+- `src/assets/` — foto e capturas dos projetos, importadas em `src/data/`
+  (otimizadas para WebP no build; caminho errado quebra o build)
+- `public/` — CV em PDF, og-image, favicon e fontes auto-hospedadas
 
 ## Decisões
 
