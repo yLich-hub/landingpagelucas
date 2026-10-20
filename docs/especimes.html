@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Espécimes de fonte</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=Silkscreen&family=Geist:wght@400;600&family=Geist+Mono:wght@400;500&family=Instrument+Serif&family=Manrope:wght@400;500;600&family=Archivo:wght@500;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root { --ink:#09090c; --cream:#f3f1ec; --ash:#a3a3ad; --amber:#fbbf24; }
+  * { box-sizing: border-box; margin: 0; }
+  body { background: var(--ink); color: var(--cream); padding: 40px; display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+  .card { position: relative; border-radius: 28px; overflow: hidden; background: #131318; min-height: 520px; padding: 40px; display: flex; flex-direction: column; gap: 22px; }
+  .card img { position: absolute; right: -60px; bottom: -40px; width: 62%; border-radius: 24px; opacity: .9; box-shadow: 0 40px 80px -20px #000; }
+  .tag { font: 500 13px/1 "Inter Tight", sans-serif; color: var(--amber); letter-spacing: .02em; }
+  .logo { font-size: 72px; line-height: .95; position: relative; z-index: 1; }
+  .logo b { color: var(--amber); font-weight: inherit; }
+  .title { font-size: 46px; line-height: 1; max-width: 13ch; position: relative; z-index: 1; text-wrap: balance; }
+  .lead { font-size: 17px; line-height: 1.5; max-width: 34ch; color: var(--ash); position: relative; z-index: 1; }
+  .pill { align-self: flex-start; border-radius: 999px; padding: 12px 22px; background: var(--cream); color: var(--ink); font-size: 15px; position: relative; z-index: 1; }
+
+  .a .logo, .a .title { font-family: "Inter Tight"; font-weight: 600; letter-spacing: -.045em; }
+  .a .logo b { font-family: "Silkscreen"; letter-spacing: 0; }
+  .a .lead, .a .pill { font-family: "Inter Tight"; }
+  .a .sig { font-family: "Silkscreen"; font-size: 14px; color: var(--amber); position: relative; z-index: 1; }
+
+  .b .logo, .b .title { font-family: "Geist"; font-weight: 600; letter-spacing: -.045em; }
+  .b .lead, .b .pill { font-family: "Geist"; }
+  .b .sig { font-family: "Geist Mono"; font-size: 14px; color: var(--amber); position: relative; z-index: 1; }
+
+  .c .logo, .c .title { font-family: "Instrument Serif"; font-weight: 400; letter-spacing: -.02em; }
+  .c .title { font-size: 54px; }
+  .c .lead, .c .pill { font-family: "Manrope"; }
+  .c .sig { font-family: "Manrope"; font-size: 14px; color: var(--amber); position: relative; z-index: 1; }
+
+  .d .logo, .d .title { font-family: "Archivo"; font-weight: 800; text-transform: uppercase; letter-spacing: -.03em; }
+  .d .title { font-size: 40px; }
+  .d .lead, .d .pill { font-family: "Manrope"; }
+  .d .sig { font-family: "JetBrains Mono"; font-size: 14px; color: var(--amber); position: relative; z-index: 1; }
+</style>
+</head>
+<body>
+  <section class="card a">
+    <span class="tag">A · Inter Tight 600 + Silkscreen (assinatura do logo atual)</span>
+    <p class="logo">lucas<b>.</b>vieira</p>
+    <p class="title">O texto da lei ele nunca escreve.</p>
+    <p class="lead">Em transição da administração para o desenvolvimento de software.</p>
+    <span class="sig">&gt; nada inventado_</span>
+    <span class="pill">Ver projetos</span>
+    <img src="../public/images/ipsis/landing.webp" alt="" />
+  </section>
+  <section class="card b">
+    <span class="tag">B · Geist + Geist Mono</span>
+    <p class="logo">lucas<b>.</b>vieira</p>
+    <p class="title">O texto da lei ele nunca escreve.</p>
+    <p class="lead">Em transição da administração para o desenvolvimento de software.</p>
+    <span class="sig">&gt; nada inventado_</span>
+    <span class="pill">Ver projetos</span>
+    <img src="../public/images/ipsis/landing.webp" alt="" />
+  </section>
+  <section class="card c">
+    <span class="tag">C · Instrument Serif + Manrope</span>
+    <p class="logo">lucas<b>.</b>vieira</p>
+    <p class="title">O texto da lei ele nunca escreve.</p>
+    <p class="lead">Em transição da administração para o desenvolvimento de software.</p>
+    <span class="sig">nada inventado</span>
+    <span class="pill">Ver projetos</span>
+    <img src="../public/images/clima/inicio.webp" alt="" />
+  </section>
+  <section class="card d">
+    <span class="tag">D · Archivo 800 caixa alta + JetBrains Mono</span>
+    <p class="logo">lucas<b>.</b>vieira</p>
+    <p class="title">O texto da lei ele nunca escreve.</p>
+    <p class="lead">Em transição da administração para o desenvolvimento de software.</p>
+    <span class="sig">&gt; nada inventado_</span>
+    <span class="pill">Ver projetos</span>
+    <img src="../public/images/clima/inicio.webp" alt="" />
+  </section>
+</body>
+</html>

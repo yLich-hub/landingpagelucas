@@ -1,0 +1,6 @@
+docs
+research_notes
+reports
+.claude
+.env*
+!.env.example
