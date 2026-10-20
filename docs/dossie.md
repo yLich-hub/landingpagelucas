@@ -50,11 +50,11 @@ entrar em contato com o pedido de conversa já escrito.
 | Cargo | Empresa | Período |
 | --- | --- | --- |
 | Estagiário | CAPS III — Centro de Atenção Psicossocial | out/2020 — out/2021 |
-| Auxiliar administrativo | Wizard Cascavel | mai/2022 — fev/2023 |
+| Auxiliar administrativo | Wizard Cascavel | mai/2022 — mar/2023 (CV de 20/10/2026; o CV antigo dizia fev/2023) |
 | Pós-vendas | Certto Telecom | mar/2023 — jul/2026 (saída confirmada pelo Lucas em 20/10/2026) |
 
 ### Formação (CV)
-- Engenharia de Software — Centro Universitário FAG — jan/2026 a dez/2029 (previsão)
+- Engenharia de Software — Centro Universitário FAG — desde fev/2026 (CV de 20/10/2026)
 - Bacharelado em Administração — Centro Universitário FAG — fev/2018 a nov/2021
 
 ### Stack declarada no site

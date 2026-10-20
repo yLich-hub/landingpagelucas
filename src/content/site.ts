@@ -54,7 +54,7 @@ export const manifesto = {
 
 export type Stop = { year: string; title: string; place: string; period: string; kind: "trabalho" | "estudo" };
 
-/** Datas do CV em PDF. */
+/** Datas do CV em PDF (versão de 20/10/2026, exportada do LinkedIn). */
 export const journey: Stop[] = [
   {
     year: "2018",
@@ -74,7 +74,7 @@ export const journey: Stop[] = [
     year: "2022",
     title: "Auxiliar administrativo",
     place: "Wizard Cascavel",
-    period: "mai/2022 — fev/2023",
+    period: "mai/2022 — mar/2023",
     kind: "trabalho",
   },
   // saída em julho de 2026, confirmada pelo Lucas em 20/10/2026
@@ -83,7 +83,7 @@ export const journey: Stop[] = [
     year: "2026",
     title: "Engenharia de Software",
     place: "Centro Universitário FAG",
-    period: "jan/2026 — dez/2029 (previsão)",
+    period: "desde fev/2026",
     kind: "estudo",
   },
 ];

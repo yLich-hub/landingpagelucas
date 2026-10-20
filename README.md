@@ -37,10 +37,11 @@ npm run build && npm start
 
 Informações:
 - [x] **WhatsApp**: `(45) 99991-3183` confirmado pelo Lucas em 20/10/2026 como WhatsApp, liberado para o site.
-- [x] **LinkedIn**: `/in/lucasmacielvieira/` confirmado em 20/10/2026. O CV em PDF ainda traz o endereço antigo (`/in/lucas-maciel-vieira-952865223/`): vale gerar o CV de novo pelo LinkedIn.
-- [x] **Certto**: saída em julho de 2026 (confirmado em 20/10/2026). O CV em PDF ainda diz "Present".
+- [x] **LinkedIn**: `/in/lucasmacielvieira/` confirmado em 20/10/2026.
+- [x] **Certto**: saída em julho de 2026 (confirmado em 20/10/2026).
 - [x] **Repositório deste site**: o código novo substituiu o portfólio em Astro no próprio `yLich-hub/landingpagelucas` (20/10/2026); o histórico antigo continua no Git.
-- [ ] **E-mail**: o CV traz `@hotmail.com`; o site usa `lucasmacielvieira55@gmail.com` (mantido).
+- [x] **CV em PDF**: substituído em 20/10/2026 pela versão nova exportada do LinkedIn (LinkedIn novo, Certto até jul/2026, certificados Cambridge PET e KET).
+- [ ] **E-mail no CV**: o CV ainda traz `@hotmail.com`; o site usa `lucasmacielvieira55@gmail.com`. Se o gmail for o principal, troque o e-mail de contato no LinkedIn e exporte de novo.
 
 Arquivos:
 - [x] **Foto**: retrato de 1333×2000 enviado em 20/10/2026, usado no manifesto e no convite.
