@@ -22,20 +22,21 @@ npm run build && npm start
 
 ## Onde editar
 
-| O quê | Onde |
-| --- | --- |
-| Textos, projetos, trajetória, stack, contato, redes, SEO | `src/content/site.ts` (única fonte de dados) |
-| Fotos e capturas (caminho, texto alternativo, tamanho) | `src/content/photos.ts` + arquivos em `public/images/` |
-| Trocar uma imagem | substitua o arquivo em `public/images/…` mantendo o nome; se a imagem antiga continuar aparecendo, apague `.next` e gere de novo |
-| Cores, tipografia, botões | `src/app/globals.css` (tokens em `@theme`, componentes em `@layer components`) |
-| Cenas da home | `src/components/home/*Scene.tsx` (uma por cena, na ordem de `src/app/page.tsx`) |
-| Logo, favicon e imagem de compartilhamento | `npm run logo` (gera tudo a partir de `scripts/build-logo.mjs`) |
-| Currículo e diploma | `public/curriculo-lucas-maciel-vieira.pdf`, `public/diploma-administracao.pdf` |
-| Esconder o WhatsApp | deixe `contact.whatsappNumber` vazio em `site.ts`: o botão flutuante e o convite passam a usar só e-mail |
+| O quê                                                    | Onde                                                                                                                             |
+| -------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| Textos, projetos, trajetória, stack, contato, redes, SEO | `src/content/site.ts` (única fonte de dados)                                                                                     |
+| Fotos e capturas (caminho, texto alternativo, tamanho)   | `src/content/photos.ts` + arquivos em `public/images/`                                                                           |
+| Trocar uma imagem                                        | substitua o arquivo em `public/images/…` mantendo o nome; se a imagem antiga continuar aparecendo, apague `.next` e gere de novo |
+| Cores, tipografia, botões                                | `src/app/globals.css` (tokens em `@theme`, componentes em `@layer components`)                                                   |
+| Cenas da home                                            | `src/components/home/*Scene.tsx` (uma por cena, na ordem de `src/app/page.tsx`)                                                  |
+| Logo, favicon e imagem de compartilhamento               | `npm run logo` (gera tudo a partir de `scripts/build-logo.mjs`)                                                                  |
+| Currículo e diploma                                      | `public/curriculo-lucas-maciel-vieira.pdf`, `public/diploma-administracao.pdf`                                                   |
+| Esconder o WhatsApp                                      | deixe `contact.whatsappNumber` vazio em `site.ts`: o botão flutuante e o convite passam a usar só e-mail                         |
 
 ## Pendências (confirmar com o Lucas)
 
 Informações:
+
 - [x] **WhatsApp**: `(45) 99991-3183` confirmado pelo Lucas em 20/10/2026 como WhatsApp, liberado para o site.
 - [x] **LinkedIn**: `/in/lucasmacielvieira/` confirmado em 20/10/2026.
 - [x] **Certto**: saída em julho de 2026 (confirmado em 20/10/2026).
@@ -44,6 +45,7 @@ Informações:
 - [ ] **E-mail no CV**: o CV ainda traz `@hotmail.com`; o site usa `lucasmacielvieira55@gmail.com`. Se o gmail for o principal, troque o e-mail de contato no LinkedIn e exporte de novo.
 
 Arquivos:
+
 - [x] **Foto**: retrato de 1333×2000 enviado em 20/10/2026, usado no manifesto e no convite.
 - [ ] **Crédito da foto**: se o retrato for de um fotógrafo, informar o nome para o crédito.
 - [ ] **Instagram e LinkedIn**: ficaram com login pendente no levantamento (só 4 posts em 640 px visíveis sem conta). Se quiser fotos de lá no site, mande os arquivos ou confirme quais usar.
@@ -53,13 +55,13 @@ Arquivos:
 
 ## Origem das imagens
 
-| Arquivo | Origem |
-| --- | --- |
-| `perfil/lucas-retrato.webp`, `perfil/lucas-rosto.webp` | retrato enviado pelo Lucas em 20/10/2026 (recorte do rosto para o avatar) |
-| `ipsis/landing*.webp` | capturas de https://ipsis-juridico.vercel.app (19/10/2026) e `src/assets/projetos/ipsis.png` do site atual |
-| `ipsis/tela-1…7.webp` | `Design_system/estado-atual.html` do repositório Ipsis (as telas reais ficam atrás de login) |
-| `clima/*.webp` | capturas de https://cascavel-clima.vercel.app (19/10/2026) e `docs/screenshots` do repositório |
-| `marca/*`, `app/icon.svg`, `app/*-image.jpg` | gerados por `scripts/build-logo.mjs` |
+| Arquivo                                                | Origem                                                                                                                                                                            |
+| ------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `perfil/lucas-retrato.webp`, `perfil/lucas-rosto.webp` | retrato enviado pelo Lucas em 20/10/2026 (recorte do rosto para o avatar)                                                                                                         |
+| `ipsis/landing*.webp`                                  | capturas de https://ipsis-juridico.vercel.app (19/10/2026) e `src/assets/projetos/ipsis.png` do site atual                                                                        |
+| `ipsis/tela-1…7.webp`                                  | `Design_system/estado-atual.html` do repositório Ipsis (as telas reais ficam atrás de login)                                                                                      |
+| `clima/*.webp`                                         | capturas de https://cascavel-clima.vercel.app em 23/10/2026 (desktop 2×, celular 3×), depois das atualizações de 20/10 (história do El Niño, detalhe do dia, painel ao vivo, PWA) |
+| `marca/*`, `app/icon.svg`, `app/*-image.jpg`           | gerados por `scripts/build-logo.mjs`                                                                                                                                              |
 
 ## Verificação feita
 

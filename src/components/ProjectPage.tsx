@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import type { ReactNode } from "react";
 import type { Photo } from "@/content/photos";
 import type { Project } from "@/content/site";
 import { projects } from "@/content/site";
@@ -17,12 +18,18 @@ export function ProjectPage({
   chapters,
   gallery,
   galleryTitle,
+  galleryLayout = "grid",
+  extra,
 }: {
   project: Project;
   hero: Photo;
   chapters: { title: string; text: string; photo: Photo }[];
   gallery: Gallery;
   galleryTitle: string;
+  /** "phones": capturas de celular inteiras, em moldura de aparelho */
+  galleryLayout?: "grid" | "phones";
+  /** seções próprias do projeto, entre os capítulos e os números */
+  extra?: ReactNode;
 }) {
   const next = projects.find((p) => p.slug !== project.slug)!;
   return (
@@ -100,6 +107,8 @@ export function ProjectPage({
         </div>
       </section>
 
+      {extra}
+
       <section aria-labelledby="numeros" className="on-paper bg-paper py-24 text-ink md:py-32">
         <div className="wrap">
           <h2 id="numeros" className="title">
@@ -129,30 +138,62 @@ export function ProjectPage({
           <h2 id="galeria" className="headline max-w-[20ch]">
             {galleryTitle}
           </h2>
-          <ul className="mt-12 grid grid-cols-[minmax(0,1fr)] gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
-            {gallery.map((g, i) => (
-              <li key={g.photo.src} data-reveal style={{ ["--reveal-delay" as string]: `${(i % 3) * 80}ms` }}>
-                <div
-                  className="shot relative"
-                  style={{
-                    aspectRatio:
-                      g.photo.width / g.photo.height < 0.8 ? "4 / 5" : `${g.photo.width} / ${g.photo.height}`,
-                  }}
+          {galleryLayout === "phones" ? (
+            <ul
+              aria-label="Telas no celular, role para o lado"
+              tabIndex={0}
+              className="no-scrollbar -mx-5 mt-12 flex snap-x snap-mandatory gap-6 overflow-x-auto px-5 lg:mx-0 lg:grid lg:grid-cols-5 lg:overflow-visible lg:px-0"
+            >
+              {gallery.map((g, i) => (
+                <li
+                  key={g.photo.src}
+                  data-reveal
+                  style={{ ["--reveal-delay" as string]: `${i * 80}ms` }}
+                  className="w-[62vw] max-w-[16rem] shrink-0 snap-center lg:w-auto lg:max-w-none"
                 >
-                  <Image
-                    src={g.photo.src}
-                    alt={g.photo.alt}
-                    fill
-                    loading={i < 6 ? "eager" : "lazy"}
-                    sizes="(min-width: 1024px) 26rem, (min-width: 640px) 46vw, 92vw"
-                    className="object-cover object-top"
-                  />
-                </div>
-                <h3 className="mt-4 font-semibold tracking-[-0.02em]">{g.title}</h3>
-                {g.note && <p className="text-ash">{g.note}</p>}
-              </li>
-            ))}
-          </ul>
+                  <div
+                    className="relative overflow-hidden rounded-[2rem] bg-ink-3 shadow-[0_40px_80px_-30px_rgb(0_0_0/.9),inset_0_0_0_1px_rgb(255_255_255/.1)] ring-[5px] ring-ink-4"
+                    style={{ aspectRatio: `${g.photo.width} / ${g.photo.height}` }}
+                  >
+                    <Image
+                      src={g.photo.src}
+                      alt={g.photo.alt}
+                      fill
+                      sizes="(min-width: 1024px) 15rem, 62vw"
+                      className="object-cover object-top"
+                    />
+                  </div>
+                  <h3 className="mt-4 font-semibold tracking-[-0.02em]">{g.title}</h3>
+                  {g.note && <p className="text-ash">{g.note}</p>}
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <ul className="mt-12 grid grid-cols-[minmax(0,1fr)] gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+              {gallery.map((g, i) => (
+                <li key={g.photo.src} data-reveal style={{ ["--reveal-delay" as string]: `${(i % 3) * 80}ms` }}>
+                  <div
+                    className="shot relative"
+                    style={{
+                      aspectRatio:
+                        g.photo.width / g.photo.height < 0.8 ? "4 / 5" : `${g.photo.width} / ${g.photo.height}`,
+                    }}
+                  >
+                    <Image
+                      src={g.photo.src}
+                      alt={g.photo.alt}
+                      fill
+                      loading={i < 6 ? "eager" : "lazy"}
+                      sizes="(min-width: 1024px) 26rem, (min-width: 640px) 46vw, 92vw"
+                      className="object-cover object-top"
+                    />
+                  </div>
+                  <h3 className="mt-4 font-semibold tracking-[-0.02em]">{g.title}</h3>
+                  {g.note && <p className="text-ash">{g.note}</p>}
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
       </section>
 

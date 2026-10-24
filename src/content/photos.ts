@@ -41,44 +41,87 @@ export const photos = {
     2520,
   ),
 
+  // Clima Cascavel: capturas do site publicado em 23/10/2026 (depois das atualizações de 20/10)
   clima: p(
-    "/images/clima/inicio.webp",
-    "Clima Cascavel à noite: céu limpo, 15 °C, vento, arco do sol e índice UV em cards de vidro",
+    "/images/clima/inicio-2026-10.webp",
+    "Início do Clima Cascavel à noite: nublado, 18 °C, cards de vidro de vento, sol e índice UV sobre a cena de nuvens",
     1920,
     1200,
   ),
-  climaDays: p(
-    "/images/clima/inicio-dias.webp",
-    "Clima Cascavel: curva de temperatura dos próximos sete dias",
+  climaDayDetail: p(
+    "/images/clima/detalhe-do-dia.webp",
+    "Card “Detalhe do dia”: abas em pílula dos sete dias, gráfico de chuva hora a hora e a lista das próximas horas",
     1920,
     1200,
   ),
-  climaCloudy: p(
-    "/images/clima/inicio-nublado.webp",
-    "Clima Cascavel em dia nublado: 24 °C, sensação térmica e chance de chuva",
-    1440,
-    900,
-  ),
-  climaElNino: p(
-    "/images/clima/el-nino.webp",
-    "Página El Niño do Clima Cascavel, com o aviso de que um dia de chuva não pode ser atribuído ao fenômeno",
+  climaStory: [
+    p(
+      "/images/clima/historia-1.webp",
+      "História do El Niño, passo 1: “Um oceano que mexe com o clima do planeta”, com o mar ilustrado azul",
+      1920,
+      1200,
+    ),
+    p(
+      "/images/clima/historia-2.webp",
+      "Passo 2, La Niña: “Quando o Pacífico esfria”, com o mar ilustrado em azul frio",
+      1920,
+      1200,
+    ),
+    p(
+      "/images/clima/historia-3.webp",
+      "Passo 3, El Niño: “Quando o Pacífico esquenta”, com o mar ilustrado aquecendo",
+      1920,
+      1200,
+    ),
+    p(
+      "/images/clima/historia-4.webp",
+      "Passo 4: “E como está o Pacífico agora?”, com +3,3 °C na região Niño 3.4 segundo o NOAA",
+      1920,
+      1200,
+    ),
+  ],
+  climaLive: p(
+    "/images/clima/el-nino-ao-vivo.webp",
+    "Painel “Agora no Pacífico”: situação oficial do NOAA (El Niño em curso), régua do Niño 3.4 em +3,3 °C e gráfico das últimas 52 semanas",
     1920,
     1200,
   ),
-  climaElNinoData: p("/images/clima/el-nino-dados.webp", "Página El Niño: situação atual com fonte e data", 1920, 1200),
+  climaAbout: p(
+    "/images/clima/sobre.webp",
+    "Página Sobre e fontes: previsão do tempo, alertas oficiais e contexto climático explicados como três coisas diferentes",
+    1920,
+    1200,
+  ),
   climaMobile: p(
-    "/images/clima/inicio-celular.webp",
-    "Clima Cascavel no celular, cena de céu limpo à noite",
+    "/images/clima/inicio-celular-2026-10.webp",
+    "Início do Clima Cascavel no celular, com o menu inferior de app instalável",
     780,
     1688,
   ),
-  climaDrizzleMobile: p(
-    "/images/clima/inicio-garoa-celular.webp",
-    "Clima Cascavel no celular, cena de garoa",
-    250,
-    498,
+  climaDayDetailMobile: p(
+    "/images/clima/detalhe-celular.webp",
+    "Detalhe do dia no celular: abas dos dias e chuva hora a hora",
+    780,
+    1688,
   ),
-  climaElNinoMobile: p("/images/clima/el-nino-celular.webp", "Página El Niño no celular", 250, 498),
+  climaLaNinaMobile: p(
+    "/images/clima/historia-la-nina-celular.webp",
+    "História do El Niño no celular, passo La Niña, com o mar azul",
+    780,
+    1688,
+  ),
+  climaNowMobile: p(
+    "/images/clima/historia-agora-celular.webp",
+    "História do El Niño no celular, último passo: +3,3 °C no Pacífico agora",
+    780,
+    1688,
+  ),
+  climaLiveMobile: p(
+    "/images/clima/el-nino-ao-vivo-celular.webp",
+    "Painel “Agora no Pacífico” no celular, com a situação oficial do NOAA",
+    780,
+    1688,
+  ),
 };
 
 /** As sete telas do Ipsis (Design_system/estado-atual.html do repositório), com o rótulo real de cada uma. */

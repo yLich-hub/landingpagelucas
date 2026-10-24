@@ -161,24 +161,103 @@ export const projects: Project[] = [
   {
     slug: "clima-cascavel",
     name: "Clima Cascavel",
-    kicker: "Previsão do tempo para Cascavel",
+    kicker: "Previsão do tempo e El Niño ao vivo",
     // princípio do README do Clima Cascavel
     claim: "Nada inventado.",
-    summary: "Condições atuais e previsão do tempo para Cascavel, Paraná, com contexto educativo sobre El Niño.",
+    summary:
+      "Condições atuais e previsão do tempo para Cascavel, Paraná, com o El Niño explicado como história e acompanhado ao vivo pelos dados do NOAA.",
     problem:
       "Previsão, alerta oficial e contexto climático costumam aparecer misturados — e um site de tempo que mostra valor de exemplo quando a API falha engana quem vai sair de casa.",
+    // README do Clima Cascavel (20/10/2026)
     solution:
-      "Next.js com cache no servidor da API gratuita Open-Meteo, tratamento explícito de dado velho e de falha do provedor. Sem dado válido, o site mostra “indisponível”, nunca valores de exemplo. As cenas de fundo mudam com o tempo em Cascavel e são desenhadas em código (CSS, SVG e canvas).",
+      "Next.js com cache no servidor para duas fontes públicas: Open-Meteo (a cada 10 min) e NOAA (a cada 6 h). Cada busca tem timeout, uma retentativa e o último dado bom guardado por 24 h. Sem dado válido, o site mostra “indisponível”, nunca valores de exemplo; dado velho aparece com aviso de idade.",
     principle: "Previsão ≠ alerta oficial ≠ contexto climático.",
     metrics: [
-      { value: 10, display: "10", label: "minutos de cache no servidor" },
+      // `npx vitest run` em 23/10/2026: 25 arquivos, 539 testes
+      { value: 539, display: "539", label: "testes automáticos em todo push" },
+      { value: 2, display: "2", label: "fontes ao vivo: Open-Meteo e NOAA" },
+      { value: 30, display: "30", label: "minutos entre as checagens do monitoramento" },
       { value: 4.5, display: "4,5:1", label: "contraste mínimo garantido por teste", decimals: 1 },
     ],
-    stack: ["Next.js 16", "TypeScript", "Open-Meteo", "Zod", "Vitest", "Tailwind CSS", "Vercel"],
+    stack: [
+      "Next.js 16",
+      "TypeScript",
+      "Zod",
+      "Open-Meteo",
+      "NOAA CPC",
+      "Vitest",
+      "Tailwind CSS",
+      "PWA",
+      "GitHub Actions",
+      "Vercel",
+    ],
     live: "https://cascavel-clima.vercel.app",
     repo: "https://github.com/yLich-hub/cascavel-clima",
   },
 ];
+
+/** Partes do Clima Cascavel que só aparecem na página do projeto (README de 20/10/2026). */
+export const climaDetails = {
+  story: {
+    title: "O El Niño contado como história.",
+    lead: "Uma cena presa à rolagem: o mar ilustrado esfria e esquenta em quatro passos, e o último mostra o dado real do NOAA daquela semana.",
+    steps: [
+      "Um oceano que mexe com o clima do planeta",
+      "Quando o Pacífico esfria",
+      "Quando o Pacífico esquenta",
+      "E como está o Pacífico agora?",
+    ],
+  },
+  chapters: {
+    live: {
+      title: "O Pacífico ao vivo.",
+      text: "O painel “Agora no Pacífico” lê três arquivos públicos do NOAA (semanal, RONI e o boletim mensal) e mostra a situação oficial, a régua do Niño 3.4 e as últimas 52 semanas. Os gráficos têm tabela e navegação por teclado. Quando sai boletim novo, o site avisa no topo e abre uma issue no GitHub para revisar os textos.",
+    },
+    day: {
+      title: "A chuva, hora a hora.",
+      text: "O detalhe do dia tem abas com os sete dias e barras de chuva prevista por hora, com chance e temperatura na leitura e uma tabela com todas as horas. Com a aba aberta, os dados se atualizam sozinhos.",
+    },
+  },
+  // como o dado chega à tela (README, seção Arquitetura)
+  flow: [
+    { name: "Open-Meteo", note: "previsão, cache de 10 min" },
+    { name: "NOAA CPC", note: "El Niño, cache de 6 h" },
+    {
+      name: "Servidor Next.js",
+      note: "valida cada resposta (Zod e parsers estritos), timeout de 8 s, retentativa e último dado bom por 24 h",
+    },
+    { name: "/api/weather e /api/enso", note: "JSON normalizado; dado expirado some" },
+    { name: "Tela", note: "idade do dado calculada a cada acesso" },
+  ],
+  // README, seção Qualidade
+  quality: [
+    {
+      title: "CI em todo push",
+      text: "lint, tipos, 539 testes, build e QA visual no navegador (computador e celular).",
+    },
+    {
+      title: "Monitoramento",
+      text: "a cada 30 min confere páginas e APIs; se a previsão envelhecer ou o NOAA parar, o GitHub avisa por e-mail.",
+    },
+    {
+      title: "App instalável",
+      text: "PWA com menu inferior no celular e página sem conexão; nenhum dado do tempo fica guardado no aparelho.",
+    },
+    {
+      title: "Movimento com cuidado",
+      text: "raios com no máximo 2 clarões (WCAG 2.3.1); chuva pausa fora da tela; quem reduz animações vê tudo parado.",
+    },
+  ],
+  // Lighthouse 12 no celular, site publicado, 20/10/2026, mediana de 3 medições (README)
+  lighthouse: [
+    { page: "Início", performance: 91, accessibility: 100, lcp: "2,4 s" },
+    { page: "El Niño", performance: 93, accessibility: 100, lcp: "2,1 s" },
+    { page: "Sobre", performance: 99, accessibility: 100, lcp: "2,0 s" },
+  ],
+  lighthouseNote:
+    "Lighthouse 12 no celular, site publicado, 20/10/2026. Mediana de 3 medições; boas práticas e SEO em 100 e CLS 0 nas três páginas.",
+  liveApi: "https://cascavel-clima.vercel.app/api/weather",
+};
 
 /** Repositórios menores (GitHub). */
 export const studies = [

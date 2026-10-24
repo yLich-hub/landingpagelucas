@@ -14,7 +14,7 @@ export function ContactScene() {
   return (
     <section aria-labelledby="conversar-titulo" className="relative overflow-hidden bg-ink py-28 md:py-40">
       <div aria-hidden className="absolute inset-0 opacity-25">
-        <Image src={photos.climaCloudy.src} alt="" fill sizes="100vw" className="object-cover blur-2xl" />
+        <Image src={photos.clima.src} alt="" fill sizes="100vw" className="object-cover blur-2xl" />
       </div>
       <div
         aria-hidden
