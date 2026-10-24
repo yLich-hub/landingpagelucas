@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import { getContent, type Locale } from "@/content";
 import type { Photo } from "@/content/photos";
 
 /**
@@ -9,14 +10,17 @@ import type { Photo } from "@/content/photos";
  * conforme as legendas passam pelo meio da tela. Sem JS, cada passo traz a própria captura.
  */
 export function ClimaStory({
+  locale,
   title,
   lead,
   steps,
 }: {
+  locale: Locale;
   title: string;
   lead: string;
   steps: { caption: string; photo: Photo }[];
 }) {
+  const t = getContent(locale).ui.climaStory;
   const [active, setActive] = useState(0);
   const items = useRef<(HTMLLIElement | null)[]>([]);
 
@@ -56,7 +60,7 @@ export function ClimaStory({
             >
               <div>
                 <p className="text-sm text-ash">
-                  <span className="tabular">Passo {i + 1}</span> de {steps.length}
+                  <span className="tabular">{t.step(i + 1, steps.length)}</span>
                 </p>
                 <p className="title mt-2 max-w-[18ch] transition-colors duration-500 md:text-ash md:group-aria-[current=step]:text-cream">
                   {s.caption}

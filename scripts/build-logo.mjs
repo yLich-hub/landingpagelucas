@@ -102,9 +102,25 @@ for (let y = 0; y < H; y += 18) {
   }
 }
 const ogScale = 1.6;
-const tagline = textPath(regular, "Estudante de Engenharia de Software · Cascavel — PR", 0, 0, 36, -0.012);
-const tagline2 = textPath(regular, "Projetos: Ipsis (pesquisa jurídica) e Clima Cascavel", 0, 0, 28, -0.01);
-const og = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}">
+// uma imagem por idioma: português em app/(pt), inglês em app/(en)/en (cada uma vale para as páginas abaixo dela)
+const ogVariants = [
+  {
+    dir: "src/app/(pt)",
+    line1: "Estudante de Engenharia de Software · Cascavel — PR",
+    line2: "Projetos: Ipsis (pesquisa jurídica) e Clima Cascavel",
+    alt: "lucas.vieira — Lucas Maciel Vieira, estudante de Engenharia de Software em Cascavel, PR",
+  },
+  {
+    dir: "src/app/(en)/en",
+    line1: "Software Engineering student · Cascavel, Brazil",
+    line2: "Projects: Ipsis (legal research) and Clima Cascavel",
+    alt: "lucas.vieira — Lucas Maciel Vieira, Software Engineering student in Cascavel, Brazil",
+  },
+];
+for (const v of ogVariants) {
+  const tagline = textPath(regular, v.line1, 0, 0, 36, -0.012);
+  const tagline2 = textPath(regular, v.line2, 0, 0, 28, -0.01);
+  const og = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}">
 <rect width="${W}" height="${H}" fill="${INK}"/>
 ${grid}
 <rect width="${W}" height="${H}" fill="url(#v)"/>
@@ -116,13 +132,12 @@ ${grid}
 <path fill="${CREAM}" transform="translate(84 ${300 + height * ogScale + 64})" d="${tagline.d}"/>
 <path fill="${ASH}" transform="translate(84 ${300 + height * ogScale + 116})" d="${tagline2.d}"/>
 </svg>`;
-for (const name of ["opengraph-image.jpg", "twitter-image.jpg"]) {
-  await sharp(Buffer.from(og))
-    .jpeg({ quality: 88 })
-    .toFile(path.join(root, "src/app", name));
-  writeFileSync(
-    path.join(root, "src/app", name.replace(".jpg", ".alt.txt")),
-    "lucas.vieira — Lucas Maciel Vieira, estudante de Engenharia de Software em Cascavel, PR",
-  );
+  mkdirSync(path.join(root, v.dir), { recursive: true });
+  for (const name of ["opengraph-image.jpg", "twitter-image.jpg"]) {
+    await sharp(Buffer.from(og))
+      .jpeg({ quality: 88 })
+      .toFile(path.join(root, v.dir, name));
+    writeFileSync(path.join(root, v.dir, name.replace(".jpg", ".alt.txt")), v.alt);
+  }
 }
 console.log("logo", width, "x", height, "· ícones e OG gerados");

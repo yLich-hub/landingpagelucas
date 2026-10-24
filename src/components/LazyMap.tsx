@@ -3,7 +3,17 @@
 import { useEffect, useRef, useState } from "react";
 
 // ⚠ o iframe do Google Maps pesa ~75 kB de JS e o loading="lazy" dispara cedo em página longa
-export function LazyMap({ embedUrl, openUrl, title }: { embedUrl: string; openUrl: string; title: string }) {
+export function LazyMap({
+  embedUrl,
+  openUrl,
+  title,
+  openLabel,
+}: {
+  embedUrl: string;
+  openUrl: string;
+  title: string;
+  openLabel: string;
+}) {
   const ref = useRef<HTMLDivElement>(null);
   const [show, setShow] = useState(false);
 
@@ -36,7 +46,7 @@ export function LazyMap({ embedUrl, openUrl, title }: { embedUrl: string; openUr
       ) : (
         <div className="flex size-full items-center justify-center p-6">
           <a href={openUrl} target="_blank" rel="noopener noreferrer" className="pill pill-glass">
-            Abrir no Google Maps
+            {openLabel}
           </a>
         </div>
       )}

@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
-import { person } from "@/content/site";
+import { site } from "@/content";
 
 export default function robots(): MetadataRoute.Robots {
-  return { rules: [{ userAgent: "*", allow: "/" }], sitemap: new URL("/sitemap.xml", person.url).toString() };
+  return { rules: [{ userAgent: "*", allow: "/" }], sitemap: new URL("/sitemap.xml", site.url).toString() };
 }

@@ -2,12 +2,14 @@
 
 import Image from "next/image";
 import { useRef } from "react";
-import { manifesto } from "@/content/site";
-import { photos } from "@/content/photos";
+import { getContent, type Locale } from "@/content";
+import { getPhotos } from "@/content/photos";
 import { gsap, MOTION_OK, useGSAP } from "@/lib/gsap";
 
 /** Cena 2 — o convite: a frase dele acende palavra por palavra; a foto abre de baixo para cima. */
-export function ManifestoScene() {
+export function ManifestoScene({ locale }: { locale: Locale }) {
+  const { manifesto } = getContent(locale);
+  const photos = getPhotos(locale);
   const root = useRef<HTMLElement>(null);
   const words = manifesto.quote.split(" ");
 
@@ -64,7 +66,7 @@ export function ManifestoScene() {
               />
             </div>
           </div>
-          <figcaption className="mt-4 text-sm text-ash">Lucas Maciel Vieira, Cascavel — PR</figcaption>
+          <figcaption className="mt-4 text-sm text-ash">{manifesto.caption}</figcaption>
         </figure>
         <div className="order-1 md:order-2">
           <h2 id="convite-titulo" className="label">

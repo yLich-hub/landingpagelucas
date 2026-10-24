@@ -1,14 +1,17 @@
-import { climaDetails } from "@/content/site";
+import { climaLighthouse, getContent, type Locale } from "@/content";
 
 /** Como o dado chega à tela + qualidade (README do Clima Cascavel). Sem animação: é leitura. */
-export function ClimaInside({ solution }: { solution: string }) {
-  const { flow, quality, lighthouse, lighthouseNote } = climaDetails;
+export function ClimaInside({ locale, solution }: { locale: Locale; solution: string }) {
+  const c = getContent(locale);
+  const t = c.ui.climaInside;
+  const { flow, quality, lighthousePages, lighthouseNote } = c.clima;
+  const seconds = (v: number) => `${v.toLocaleString(c.numberLocale, { minimumFractionDigits: 1 })} s`;
   return (
     <>
       <section aria-labelledby="caminho-titulo" className="bg-ink py-24 md:py-32">
         <div className="wrap">
           <h2 id="caminho-titulo" className="headline max-w-[18ch]">
-            Do provedor à tela, sem inventar.
+            {t.flowTitle}
           </h2>
           <p className="lead mt-5 max-w-[52ch] text-ash">{solution}</p>
           <ol className="relative mt-14 grid gap-4 md:grid-cols-5 md:gap-3">
@@ -42,7 +45,7 @@ export function ClimaInside({ solution }: { solution: string }) {
         <div className="wrap grid grid-cols-[minmax(0,1fr)] gap-14 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:gap-16">
           <div>
             <h2 id="qualidade-titulo" className="headline max-w-[16ch]">
-              Testado antes de chegar ao ar.
+              {t.qualityTitle}
             </h2>
             <ul className="mt-10 grid gap-4 sm:grid-cols-2">
               {quality.map((q, i) => (
@@ -59,34 +62,27 @@ export function ClimaInside({ solution }: { solution: string }) {
             </ul>
           </div>
           <div data-reveal className="self-end">
-            <h3 className="title">Lighthouse no celular</h3>
+            <h3 className="title">{t.lighthouseTitle}</h3>
             <table className="mt-6 w-full text-left">
-              <caption className="sr-only">Notas do Lighthouse por página</caption>
+              <caption className="sr-only">{t.lighthouseCaption}</caption>
               <thead>
                 <tr className="text-sm text-ash">
-                  <th scope="col" className="pb-3 font-normal">
-                    Página
-                  </th>
-                  <th scope="col" className="pb-3 font-normal">
-                    Performance
-                  </th>
-                  <th scope="col" className="pb-3 font-normal">
-                    Acessibilidade
-                  </th>
-                  <th scope="col" className="pb-3 font-normal">
-                    LCP
-                  </th>
+                  {t.cols.map((col) => (
+                    <th key={col} scope="col" className="pb-3 font-normal">
+                      {col}
+                    </th>
+                  ))}
                 </tr>
               </thead>
               <tbody className="tabular">
-                {lighthouse.map((l) => (
-                  <tr key={l.page} className="border-t border-white/8">
+                {climaLighthouse.map((l) => (
+                  <tr key={l.key} className="border-t border-white/8">
                     <th scope="row" className="py-4 font-medium">
-                      {l.page}
+                      {lighthousePages[l.key]}
                     </th>
                     <td className="py-4 text-[1.75rem] font-semibold tracking-[-0.03em]">{l.performance}</td>
                     <td className="py-4 text-[1.75rem] font-semibold tracking-[-0.03em]">{l.accessibility}</td>
-                    <td className="py-4 text-ash">{l.lcp}</td>
+                    <td className="py-4 text-ash">{seconds(l.lcpSeconds)}</td>
                   </tr>
                 ))}
               </tbody>

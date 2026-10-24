@@ -1,11 +1,11 @@
 import type { MetadataRoute } from "next";
-import { person } from "@/content/site";
+import { getContent, site } from "@/content";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: `${person.name} — portfólio`,
+    name: `${site.name} — portfólio`,
     short_name: "lucas.vieira",
-    description: person.shortBio,
+    description: getContent("pt").person.shortBio,
     start_url: "/",
     display: "standalone",
     background_color: "#09090c",

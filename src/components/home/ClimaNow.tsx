@@ -2,12 +2,14 @@
 
 import { useEffect, useRef, useState } from "react";
 import type { ClimaNow as Now } from "@/app/api/clima-agora/route";
+import { getContent, type Locale } from "@/content";
 
 /**
  * Selo "Agora em Cascavel": o tempo real, lido da API do próprio projeto quando a cena chega perto.
  * Sem dado válido, não mostra nada (o espaço fica reservado para não pular o layout).
  */
-export function ClimaNow({ className }: { className?: string }) {
+export function ClimaNow({ locale, className }: { locale: Locale; className?: string }) {
+  const t = getContent(locale).ui.climaNow;
   const ref = useRef<HTMLParagraphElement>(null);
   const [now, setNow] = useState<Now | null>(null);
 
@@ -19,7 +21,7 @@ export function ClimaNow({ className }: { className?: string }) {
       ([e]) => {
         if (!e.isIntersecting) return;
         io.disconnect();
-        fetch("/api/clima-agora", { signal: ctrl.signal })
+        fetch(`/api/clima-agora${locale === "en" ? "?lang=en" : ""}`, { signal: ctrl.signal })
           .then((r) => (r.ok ? (r.json() as Promise<Now>) : { ok: false as const }))
           .then(setNow)
           .catch(() => setNow({ ok: false }));
@@ -31,7 +33,7 @@ export function ClimaNow({ className }: { className?: string }) {
       io.disconnect();
       ctrl.abort();
     };
-  }, []);
+  }, [locale]);
 
   const shown = now?.ok ? now : null;
   return (
@@ -43,10 +45,13 @@ export function ClimaNow({ className }: { className?: string }) {
             className={`size-2 ${shown.status === "fresh" ? "bg-[#34d399] shadow-[0_0_10px_#34d399]" : "bg-amber"}`}
           />
           <span>
-            Agora em Cascavel: <strong className="tabular font-semibold">{shown.tempC} °C</strong>
+            {t.now} <strong className="tabular font-semibold">{shown.tempC} °C</strong>
             {shown.label ? `, ${shown.label}` : ""}
           </span>
-          <span className="text-ash">dado das {shown.time}, lido da API do projeto</span>
+          <span className="text-ash">
+            {t.reading} {shown.time}
+            {t.tz}, {t.source}
+          </span>
         </span>
       )}
     </p>

@@ -1,17 +1,22 @@
 import type { MetadataRoute } from "next";
-import { person, projects } from "@/content/site";
+import { getContent, locales, paths, site, translatePath } from "@/content";
 
 // data fixa da última revisão do conteúdo (sem new Date(): a rota é estática)
-const updated = "2026-10-20";
+const updated = "2026-10-23";
+const abs = (path: string) => new URL(path, site.url).toString();
 
+/** Cada página nos dois idiomas, com as alternativas de idioma (hreflang). */
 export default function sitemap(): MetadataRoute.Sitemap {
-  return [
-    { url: person.url, lastModified: updated, changeFrequency: "monthly", priority: 1 },
-    ...projects.map((p) => ({
-      url: new URL(`/projetos/${p.slug}`, person.url).toString(),
+  const pages = [paths.home("pt"), ...getContent("pt").projects.map((p) => paths.project("pt", p.slug))];
+  return pages.flatMap((ptPath) =>
+    locales.map((l) => ({
+      url: abs(translatePath(ptPath, l)),
       lastModified: updated,
       changeFrequency: "monthly" as const,
-      priority: 0.8,
+      priority: ptPath === "/" ? 1 : 0.8,
+      alternates: {
+        languages: { "pt-BR": abs(translatePath(ptPath, "pt")), en: abs(translatePath(ptPath, "en")) },
+      },
     })),
-  ];
+  );
 }

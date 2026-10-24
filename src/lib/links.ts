@@ -1,4 +1,4 @@
-import { contact, invite } from "@/content/site";
+import { contact } from "@/content/shared";
 
 export const hasWhatsapp = contact.whatsappNumber.length > 0;
 
@@ -7,7 +7,7 @@ export function whatsappUrl(text?: string) {
   return text ? `${base}?text=${encodeURIComponent(text)}` : base;
 }
 
-export function mailtoUrl(body?: string, subject: string = invite.subject) {
+export function mailtoUrl(body: string | undefined, subject: string) {
   const params = new URLSearchParams();
   params.set("subject", subject);
   if (body) params.set("body", body);

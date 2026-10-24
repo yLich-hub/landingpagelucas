@@ -2,8 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
 import type { Photo } from "@/content/photos";
-import type { Project } from "@/content/site";
-import { projects } from "@/content/site";
+import { getContent, paths, type Locale, type Project } from "@/content";
 import { breadcrumbJsonLd, projectJsonLd } from "@/lib/schema";
 import { Metric } from "./home/Metric";
 import { IconArrowUpRight, IconChevron, IconGithub } from "./icons";
@@ -13,6 +12,7 @@ type Gallery = { title: string; note?: string; photo: Photo }[];
 
 /** Página interna de projeto: hero com a tela principal, capítulos alternando texto e captura. */
 export function ProjectPage({
+  locale,
   project,
   hero,
   chapters,
@@ -21,6 +21,7 @@ export function ProjectPage({
   galleryLayout = "grid",
   extra,
 }: {
+  locale: Locale;
   project: Project;
   hero: Photo;
   chapters: { title: string; text: string; photo: Photo }[];
@@ -31,15 +32,20 @@ export function ProjectPage({
   /** seções próprias do projeto, entre os capítulos e os números */
   extra?: ReactNode;
 }) {
-  const next = projects.find((p) => p.slug !== project.slug)!;
+  const c = getContent(locale);
+  const t = c.ui.project;
+  const next = c.projects.find((p) => p.slug !== project.slug)!;
   return (
     <>
       <section className="bg-ink pb-16 pt-32 md:pb-24 md:pt-44">
         <div className="wrap">
-          <nav aria-label="Trilha" className="text-sm text-ash">
-            <Link href="/#projetos" className="inline-flex min-h-11 items-center gap-1 hover:text-cream">
+          <nav aria-label={t.breadcrumb} className="text-sm text-ash">
+            <Link
+              href={paths.anchor(locale, "projetos")}
+              className="inline-flex min-h-11 items-center gap-1 hover:text-cream"
+            >
               <IconChevron className="rotate-180" />
-              Projetos
+              {t.projects}
             </Link>
           </nav>
           <p className="label mt-6">{project.kicker}</p>
@@ -50,16 +56,21 @@ export function ProjectPage({
           <div className="mt-8 flex flex-wrap gap-3">
             {project.live && (
               <a href={project.live} className="pill pill-light">
-                Abrir o site
+                {t.openSite}
                 <IconArrowUpRight width={16} height={16} />
               </a>
             )}
             <a href={project.repo} className="pill pill-glass">
               <IconGithub width={18} height={18} />
-              Ver código
+              {t.seeCode}
             </a>
           </div>
-          {project.liveNote && <p className="mt-4 text-sm text-ash">O site está no ar; {project.liveNote}.</p>}
+          {project.liveNote && (
+            <p className="mt-4 text-sm text-ash">
+              {t.liveIntro} {project.liveNote}.
+            </p>
+          )}
+          {t.screensNote && <p className="mt-2 text-sm text-ash">{t.screensNote}</p>}
         </div>
         <div className="wrap mt-14 md:mt-20">
           <div className="shot relative aspect-[16/10]">
@@ -77,7 +88,7 @@ export function ProjectPage({
 
       <section aria-labelledby="capitulos" className="bg-ink py-16 md:py-28">
         <h2 id="capitulos" className="sr-only">
-          Como foi feito
+          {t.howBuilt}
         </h2>
         <div className="wrap space-y-24 md:space-y-36">
           {chapters.map((c, i) => (
@@ -112,16 +123,16 @@ export function ProjectPage({
       <section aria-labelledby="numeros" className="on-paper bg-paper py-24 text-ink md:py-32">
         <div className="wrap">
           <h2 id="numeros" className="title">
-            Em números
+            {t.numbers}
           </h2>
           <div className="mt-10 grid grid-cols-2 gap-x-8 gap-y-12 md:grid-cols-4">
             {project.metrics.map((m) => (
-              <Metric key={m.label} metric={m} />
+              <Metric key={m.label} metric={m} numberLocale={c.numberLocale} />
             ))}
           </div>
           <blockquote className="headline mt-20 max-w-[22ch]">“{project.principle}”</blockquote>
           <div className="mt-16">
-            <h2 className="text-sm font-medium text-smoke">Stack</h2>
+            <h2 className="text-sm font-medium text-smoke">{t.stack}</h2>
             <ul className="mt-4 flex flex-wrap gap-2">
               {project.stack.map((s) => (
                 <li key={s} className="rounded-full bg-paper-2 px-4 py-2 text-[0.95rem] font-medium">
@@ -140,7 +151,7 @@ export function ProjectPage({
           </h2>
           {galleryLayout === "phones" ? (
             <ul
-              aria-label="Telas no celular, role para o lado"
+              aria-label={t.phonesAria}
               tabIndex={0}
               className="no-scrollbar -mx-5 mt-12 flex snap-x snap-mandatory gap-6 overflow-x-auto px-5 lg:mx-0 lg:grid lg:grid-cols-5 lg:overflow-visible lg:px-0"
             >
@@ -197,28 +208,28 @@ export function ProjectPage({
         </div>
       </section>
 
-      <section aria-label="Próximo projeto" className="bg-ink py-24">
+      <section aria-label={t.next} className="bg-ink py-24">
         <div className="wrap flex flex-col items-start gap-6 md:flex-row md:items-end md:justify-between">
           <div>
-            <p className="text-sm text-ash">Próximo projeto</p>
+            <p className="text-sm text-ash">{t.next}</p>
             <p className="headline mt-2">{next.name}</p>
           </div>
           <div className="flex flex-wrap gap-3">
-            <Link href={`/projetos/${next.slug}`} className="pill pill-light">
-              Ver {next.name}
+            <Link href={paths.project(locale, next.slug)} className="pill pill-light">
+              {t.see} {next.name}
             </Link>
-            <Link href="/#convite" className="pill pill-glass">
-              Montar um convite
+            <Link href={paths.anchor(locale, "convite")} className="pill pill-glass">
+              {t.buildInvite}
             </Link>
           </div>
         </div>
       </section>
 
-      <JsonLd data={projectJsonLd(project)} />
+      <JsonLd data={projectJsonLd(project, locale)} />
       <JsonLd
-        data={breadcrumbJsonLd([
-          { name: "Projetos", path: "/#projetos" },
-          { name: project.name, path: `/projetos/${project.slug}` },
+        data={breadcrumbJsonLd(locale, [
+          { name: t.projects, path: paths.anchor(locale, "projetos") },
+          { name: project.name, path: paths.project(locale, project.slug) },
         ])}
       />
     </>

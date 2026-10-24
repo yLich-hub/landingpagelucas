@@ -1,16 +1,16 @@
 import Image from "next/image";
-import { contact, education, files, person, social } from "@/content/site";
-import { photos } from "@/content/photos";
+import { contact, files, getContent, links, social, type Locale } from "@/content";
+import { getPhotos } from "@/content/photos";
 import { hasWhatsapp, whatsappUrl } from "@/lib/links";
-import { messages } from "@/content/site";
 import { LazyMap } from "../LazyMap";
 import { IconDownload, IconGithub, IconInstagram, IconLinkedin, IconWhatsapp } from "../icons";
 
-const MAP_EMBED = "https://www.google.com/maps?q=Cascavel,+Paran%C3%A1&z=12&output=embed";
-const MAP_OPEN = "https://www.google.com/maps/place/Cascavel+-+PR";
-
 /** Cena 8 — fechamento: o ponto volta como cursor; contato, cidade, formação e redes. */
-export function ContactScene() {
+export function ContactScene({ locale }: { locale: Locale }) {
+  const c = getContent(locale);
+  const t = c.ui.contact;
+  const photos = getPhotos(locale);
+  const cv = locale === "en" ? (files.cvEn ?? files.cv) : files.cv;
   return (
     <section aria-labelledby="conversar-titulo" className="relative overflow-hidden bg-ink py-28 md:py-40">
       <div aria-hidden className="absolute inset-0 opacity-25">
@@ -23,9 +23,9 @@ export function ContactScene() {
 
       <div className="wrap relative">
         <h2 id="conversar-titulo" className="display max-w-[12ch]">
-          <span className="caret">Vamos conversar?</span>
+          <span className="caret">{t.title}</span>
         </h2>
-        <p className="lead mt-6 max-w-[40ch] text-ash">Aberto a oportunidades. O caminho mais rápido é o e-mail:</p>
+        <p className="lead mt-6 max-w-[40ch] text-ash">{t.lead}</p>
         <a
           href={`mailto:${contact.email}`}
           className="mt-4 inline-block break-all py-1.5 text-[clamp(1.375rem,3.4vw,2.5rem)] font-semibold tracking-[-0.03em] text-amber underline decoration-amber/40 underline-offset-[0.18em] hover:decoration-amber"
@@ -34,33 +34,35 @@ export function ContactScene() {
         </a>
         <div className="mt-10 flex flex-wrap gap-3">
           {hasWhatsapp && (
-            <a href={whatsappUrl(messages.fab)} target="_blank" rel="noopener noreferrer" className="pill pill-wa">
+            <a href={whatsappUrl(c.messages.fab)} target="_blank" rel="noopener noreferrer" className="pill pill-wa">
               <IconWhatsapp width={18} height={18} />
-              Chamar no WhatsApp
+              {t.whatsapp}
             </a>
           )}
-          <a href={files.cv} download className="pill pill-light">
+          <a href={cv} download className="pill pill-light">
             <IconDownload width={18} height={18} />
-            Baixar currículo (PDF)
+            {t.downloadCv}
           </a>
         </div>
 
         <div className="mt-16 grid grid-cols-[minmax(0,1fr)] gap-4 md:grid-cols-3 md:grid-rows-[auto_auto]">
           <div className="card p-7">
-            <h3 className="text-sm text-ash">Onde</h3>
-            <p className="title mt-2">{person.city}</p>
-            <p className="mt-2 text-ash">Disponível para trabalho {person.availability}.</p>
+            <h3 className="text-sm text-ash">{t.where}</h3>
+            <p className="title mt-2">{c.person.city}</p>
+            <p className="mt-2 text-ash">
+              {t.available} {c.person.availability}.
+            </p>
           </div>
           <div className="card p-7">
-            <h3 className="text-sm text-ash">Formação</h3>
+            <h3 className="text-sm text-ash">{t.education}</h3>
             <ul className="mt-3 space-y-3">
-              {education.map((e) => (
+              {c.education.map((e) => (
                 <li key={e.course}>
                   <p className="font-medium">{e.course}</p>
                   <p className="text-sm text-ash">{e.school}</p>
                   {e.diploma && (
                     <a href={e.diploma} download className="more-link text-sm">
-                      Baixar diploma (PDF)
+                      {t.downloadDiploma}
                     </a>
                   )}
                 </li>
@@ -68,7 +70,7 @@ export function ContactScene() {
             </ul>
           </div>
           <div className="card p-7">
-            <h3 className="text-sm text-ash">Redes</h3>
+            <h3 className="text-sm text-ash">{t.profiles}</h3>
             <ul className="mt-3 space-y-1">
               {[
                 { href: social.github, label: "GitHub", Icon: IconGithub },
@@ -85,7 +87,7 @@ export function ContactScene() {
             </ul>
           </div>
           <div className="md:col-span-3">
-            <LazyMap embedUrl={MAP_EMBED} openUrl={MAP_OPEN} title="Mapa de Cascavel, Paraná" />
+            <LazyMap embedUrl={links.mapEmbed} openUrl={links.mapOpen} title={t.mapTitle} openLabel={t.openMap} />
           </div>
         </div>
       </div>

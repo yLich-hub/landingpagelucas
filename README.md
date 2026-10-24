@@ -5,6 +5,10 @@ logo vira a porta para os projetos), duas páginas de projeto e um montador de c
 mensagem pronta no e-mail ou no WhatsApp. Todo o conteúdo é real: textos do site atual e do CV, capturas
 dos próprios projetos.
 
+O site tem duas línguas: **português** na raiz (`/`, `/projetos/ipsis`, `/projetos/clima-cascavel`) e
+**inglês** em `/en` (`/en`, `/en/projects/ipsis`, `/en/projects/clima-cascavel`). O seletor PT/EN fica no
+cabeçalho e no canto do hero e leva para a mesma página no outro idioma.
+
 - Levantamento e status de cada fonte: [`docs/dossie.md`](docs/dossie.md)
 - Direção de arte, roteiro de cenas, tipografia e paleta: [`docs/direcao-de-arte.md`](docs/direcao-de-arte.md)
 - Espécime de fontes: [`docs/especimes.html`](docs/especimes.html)
@@ -22,16 +26,21 @@ npm run build && npm start
 
 ## Onde editar
 
-| O quê                                                    | Onde                                                                                                                             |
-| -------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
-| Textos, projetos, trajetória, stack, contato, redes, SEO | `src/content/site.ts` (única fonte de dados)                                                                                     |
-| Fotos e capturas (caminho, texto alternativo, tamanho)   | `src/content/photos.ts` + arquivos em `public/images/`                                                                           |
-| Trocar uma imagem                                        | substitua o arquivo em `public/images/…` mantendo o nome; se a imagem antiga continuar aparecendo, apague `.next` e gere de novo |
-| Cores, tipografia, botões                                | `src/app/globals.css` (tokens em `@theme`, componentes em `@layer components`)                                                   |
-| Cenas da home                                            | `src/components/home/*Scene.tsx` (uma por cena, na ordem de `src/app/page.tsx`)                                                  |
-| Logo, favicon e imagem de compartilhamento               | `npm run logo` (gera tudo a partir de `scripts/build-logo.mjs`)                                                                  |
-| Currículo e diploma                                      | `public/curriculo-lucas-maciel-vieira.pdf`, `public/diploma-administracao.pdf`                                                   |
-| Esconder o WhatsApp                                      | deixe `contact.whatsappNumber` vazio em `site.ts`: o botão flutuante e o convite passam a usar só e-mail                         |
+| O quê                                                                               | Onde                                                                                                                                               |
+| ----------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Textos em português                                                                 | `src/content/pt.ts` (projetos, trajetória, convite, SEO e todos os textos da interface em `ui`)                                                    |
+| Textos em inglês                                                                    | `src/content/en.ts` (mesmo formato do `pt.ts`; o TypeScript acusa se faltar alguma chave)                                                          |
+| Dados que não mudam entre idiomas (e-mail, WhatsApp, redes, arquivos, links, stack) | `src/content/shared.ts`                                                                                                                            |
+| Endereços de cada idioma e a troca PT ↔ EN                                          | `src/content/index.ts` (`paths`, `translatePath`)                                                                                                  |
+| Fotos e capturas (caminho, texto alternativo nos dois idiomas, tamanho)             | `src/content/photos.ts` + arquivos em `public/images/`                                                                                             |
+| Trocar uma imagem                                                                   | substitua o arquivo em `public/images/…`; se a antiga continuar aparecendo, mude o nome do arquivo (o otimizador guarda cache pelo endereço)       |
+| Cores, tipografia, botões                                                           | `src/app/globals.css` (tokens em `@theme`, componentes em `@layer components`)                                                                     |
+| Cenas da home                                                                       | `src/components/home/*Scene.tsx` (uma por cena, na ordem de `src/components/pages/HomePage.tsx`)                                                   |
+| Rotas                                                                               | `src/app/(pt)/…` e `src/app/(en)/en/…` (cada idioma é uma raiz com o próprio `<html lang>`); o 404 dos dois fica em `src/app/global-not-found.tsx` |
+| Logo, favicon e imagens de compartilhamento (uma por idioma)                        | `npm run logo` (gera tudo a partir de `scripts/build-logo.mjs`)                                                                                    |
+| Currículo e diploma                                                                 | `public/curriculo-lucas-maciel-vieira.pdf`, `public/diploma-administracao.pdf`                                                                     |
+| Currículo em inglês                                                                 | coloque o PDF em `public/` e aponte `files.cvEn` em `shared.ts`: as páginas em inglês passam a usá-lo                                              |
+| Esconder o WhatsApp                                                                 | deixe `contact.whatsappNumber` vazio em `shared.ts`: o botão flutuante e o convite passam a usar só e-mail                                         |
 
 ## Pendências (confirmar com o Lucas)
 
@@ -42,6 +51,8 @@ Informações:
 - [x] **Certto**: saída em julho de 2026 (confirmado em 20/10/2026).
 - [x] **Repositório deste site**: o código novo substituiu o portfólio em Astro no próprio `yLich-hub/landingpagelucas` (20/10/2026); o histórico antigo continua no Git.
 - [x] **CV em PDF**: substituído em 20/10/2026 pela versão nova exportada do LinkedIn (LinkedIn novo, Certto até jul/2026, certificados Cambridge PET e KET).
+- [ ] **Currículo em inglês**: as páginas em inglês oferecem o CV em português e avisam isso no botão (“Résumé (PDF, in Portuguese)”). Com o LinkedIn em inglês, dá para exportar um CV em inglês; depois é só apontar `files.cvEn` em `shared.ts`.
+- [ ] **Revisão do inglês**: os textos de `src/content/en.ts` foram traduzidos a partir do site em português; vale uma leitura sua (ou de alguém fluente) antes de mandar para recrutadores.
 - [ ] **E-mail no CV**: o CV ainda traz `@hotmail.com`; o site usa `lucasmacielvieira55@gmail.com`. Se o gmail for o principal, troque o e-mail de contato no LinkedIn e exporte de novo.
 
 Arquivos:

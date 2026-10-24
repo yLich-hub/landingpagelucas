@@ -7,19 +7,20 @@ import { JourneyScene } from "@/components/home/JourneyScene";
 import { ManifestoScene } from "@/components/home/ManifestoScene";
 import { ScreensScene } from "@/components/home/ScreensScene";
 import { LogoInline } from "@/components/LogoInline";
+import type { Locale } from "@/content";
 
 // o roteiro da home, cena por cena (docs/direcao-de-arte.md)
-export default function HomePage() {
+export function HomePage({ locale }: { locale: Locale }) {
   return (
     <>
-      <HeroScene logo={<LogoInline className="w-full text-cream" />} />
-      <ManifestoScene />
-      <IpsisScene />
-      <ScreensScene />
-      <ClimaScene />
-      <JourneyScene />
-      <InviteBuilder />
-      <ContactScene />
+      <HeroScene locale={locale} logo={<LogoInline className="w-full text-cream" />} />
+      <ManifestoScene locale={locale} />
+      <IpsisScene locale={locale} />
+      <ScreensScene locale={locale} />
+      <ClimaScene locale={locale} />
+      <JourneyScene locale={locale} />
+      <InviteBuilder locale={locale} />
+      <ContactScene locale={locale} />
     </>
   );
 }

@@ -1,7 +1,7 @@
-import type { Metric as M } from "@/content/site";
+import type { Metric as M } from "@/content";
 
 /** Número real no HTML; a contagem é só enfeite por cima. */
-export function Metric({ metric, className }: { metric: M; className?: string }) {
+export function Metric({ metric, numberLocale, className }: { metric: M; numberLocale: string; className?: string }) {
   const suffix = metric.display.replace(/^[\d.,]+/, "");
   return (
     <div className={className}>
@@ -10,6 +10,7 @@ export function Metric({ metric, className }: { metric: M; className?: string })
         data-count={metric.value}
         data-decimals={metric.decimals ?? 0}
         data-suffix={suffix}
+        data-locale={numberLocale}
       >
         {metric.display}
       </p>

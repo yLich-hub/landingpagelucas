@@ -3,26 +3,27 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRef } from "react";
-import { projects } from "@/content/site";
-import { photos } from "@/content/photos";
+import { getContent, paths, type Locale } from "@/content";
+import { getPhotos } from "@/content/photos";
 import { gsap, MOTION_OK, useGSAP } from "@/lib/gsap";
 import { IconArrowUpRight, IconChevron } from "../icons";
 import { countUp } from "./CountUp";
 import { Metric } from "./Metric";
 
-const ipsis = projects[0];
-
-const steps = [
-  { title: "O problema", photo: photos.ipsisLanding },
-  { title: "A decisão", photo: photos.ipsisCitation },
-  { title: "O resultado", photo: photos.ipsisDecisions },
-];
-
 /**
  * Cena 3 — Ipsis, em papel. No desktop a cena fica fixa e troca problema → decisão → resultado,
  * com a tela ao lado abrindo de baixo para cima. No celular e sem movimento, é uma sequência normal.
  */
-export function IpsisScene() {
+export function IpsisScene({ locale }: { locale: Locale }) {
+  const c = getContent(locale);
+  const t = c.ui.ipsis;
+  const photos = getPhotos(locale);
+  const ipsis = c.projects[0];
+  const steps = [
+    { title: t.steps[0], photo: photos.ipsisLanding },
+    { title: t.steps[1], photo: photos.ipsisCitation },
+    { title: t.steps[2], photo: photos.ipsisDecisions },
+  ];
   const root = useRef<HTMLElement>(null);
   const stage = useRef<HTMLDivElement>(null);
 
@@ -74,7 +75,7 @@ export function IpsisScene() {
   return (
     <section ref={root} id="projetos" aria-labelledby="ipsis-titulo" className="on-paper relative bg-paper text-ink">
       <div className="wrap pb-10 pt-28 md:pb-0 md:pt-40">
-        <p className="label">Projeto principal</p>
+        <p className="label">{t.label}</p>
         <h2 id="ipsis-titulo" className="headline mt-4 max-w-[18ch]">
           {ipsis.claim}
         </h2>
@@ -107,16 +108,16 @@ export function IpsisScene() {
                   <>
                     <div className="mt-6 grid grid-cols-2 gap-x-6 gap-y-8">
                       {ipsis.metrics.map((m) => (
-                        <Metric key={m.label} metric={m} />
+                        <Metric key={m.label} metric={m} numberLocale={c.numberLocale} />
                       ))}
                     </div>
                     <p className="mt-8 max-w-[40ch] font-medium">“{ipsis.principle}”</p>
                     <div className="mt-6 flex flex-wrap gap-3">
-                      <Link href={`/projetos/${ipsis.slug}`} className="pill pill-ink">
-                        Ver o projeto
+                      <Link href={paths.project(locale, ipsis.slug)} className="pill pill-ink">
+                        {t.seeProject}
                       </Link>
                       <a href={ipsis.repo} className="pill pill-line-ink">
-                        Ver código
+                        {t.seeCode}
                         <IconArrowUpRight width={16} height={16} />
                       </a>
                     </div>
@@ -136,7 +137,7 @@ export function IpsisScene() {
             ))}
             {ipsis.live && (
               <a href={ipsis.live} className="more-link md:group-data-[pin=on]/stage:hidden">
-                Abrir o Ipsis no ar <IconChevron />
+                {t.openLive} <IconChevron />
               </a>
             )}
           </div>

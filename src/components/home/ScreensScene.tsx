@@ -2,11 +2,14 @@
 
 import Image from "next/image";
 import { useRef } from "react";
-import { ipsisScreens } from "@/content/photos";
+import { getContent, type Locale } from "@/content";
+import { getIpsisScreens } from "@/content/photos";
 import { gsap, MOTION_OK, useGSAP } from "@/lib/gsap";
 
 /** Cena 4 — o Ipsis por dentro: rolagem horizontal fixa com parallax nas telas (desktop); carrossel nativo no celular. */
-export function ScreensScene() {
+export function ScreensScene({ locale }: { locale: Locale }) {
+  const t = getContent(locale).ui.screens;
+  const ipsisScreens = getIpsisScreens(locale);
   const root = useRef<HTMLElement>(null);
   const track = useRef<HTMLDivElement>(null);
 
@@ -69,15 +72,16 @@ export function ScreensScene() {
       className="relative overflow-hidden bg-ink-2 py-24 md:flex md:h-[100svh] md:flex-col md:justify-center md:pb-0 md:pt-16"
     >
       <div className="wrap">
-        <p className="label">O Ipsis por dentro</p>
+        <p className="label">{t.label}</p>
         <h2 id="telas-titulo" className="headline mt-3 max-w-[20ch]">
-          Sete telas, do chat à dosimetria.
+          {t.title}
         </h2>
+        {t.note && <p className="mt-3 text-ash">{t.note}</p>}
       </div>
       <div
         ref={track}
         role="region"
-        aria-label="Telas do Ipsis, role para o lado"
+        aria-label={t.aria}
         tabIndex={0}
         className="no-scrollbar mt-10 flex snap-x snap-mandatory scroll-px-5 gap-5 overflow-x-auto px-5 md:mt-12 md:gap-8 motion-safe:md:snap-none motion-safe:md:overflow-visible md:px-[max(3rem,calc((100vw-82rem)/2+3rem))]"
       >

@@ -1,53 +1,56 @@
-import { education, person, projects, social, stack } from "@/content/site";
-import type { Project } from "@/content/site";
+import { getContent, paths, site, social, type Locale, type Project } from "@/content";
+import { stackItems } from "@/content/shared";
 
-const abs = (path: string) => new URL(path, person.url).toString();
+const abs = (path: string) => new URL(path, site.url).toString();
 
-export function personJsonLd() {
+export function personJsonLd(locale: Locale) {
+  const c = getContent(locale);
   return {
     "@context": "https://schema.org",
     "@type": "ProfilePage",
-    url: person.url,
-    name: `${person.name} — portfólio`,
-    inLanguage: "pt-BR",
+    url: abs(paths.home(locale)),
+    name: `${site.name} — ${locale === "en" ? "portfolio" : "portfólio"}`,
+    inLanguage: c.htmlLang,
     mainEntity: {
       "@type": "Person",
-      "@id": `${person.url}#lucas`,
-      name: person.name,
-      alternateName: person.mark,
-      jobTitle: person.role,
-      description: person.shortBio,
+      "@id": `${site.url}#lucas`,
+      name: site.name,
+      alternateName: site.mark,
+      jobTitle: c.person.role,
+      description: c.person.shortBio,
       image: abs("/images/perfil/lucas-retrato.webp"),
-      url: person.url,
+      url: abs(paths.home(locale)),
       address: { "@type": "PostalAddress", addressLocality: "Cascavel", addressRegion: "PR", addressCountry: "BR" },
-      alumniOf: education.map((e) => ({ "@type": "CollegeOrUniversity", name: e.school })),
+      alumniOf: c.education.map((e) => ({ "@type": "CollegeOrUniversity", name: e.school })),
       knowsLanguage: ["pt-BR", "en"],
-      knowsAbout: stack.flatMap((g) => g.items),
+      knowsAbout: Object.values(stackItems).flat(),
       sameAs: [social.github, social.linkedin, social.instagram],
     },
   };
 }
 
-export function projectJsonLd(project: Project) {
+export function projectJsonLd(project: Project, locale: Locale) {
   return {
     "@context": "https://schema.org",
     "@type": "SoftwareSourceCode",
     name: project.name,
     description: project.summary,
+    inLanguage: getContent(locale).htmlLang,
     codeRepository: project.repo,
-    url: abs(`/projetos/${project.slug}`),
+    url: abs(paths.project(locale, project.slug)),
     programmingLanguage: "TypeScript",
     runtimePlatform: project.stack.join(", "),
-    author: { "@id": `${person.url}#lucas` },
+    author: { "@id": `${site.url}#lucas` },
     ...(project.live ? { targetProduct: { "@type": "WebApplication", name: project.name, url: project.live } } : {}),
   };
 }
 
-export function breadcrumbJsonLd(items: { name: string; path: string }[]) {
+export function breadcrumbJsonLd(locale: Locale, items: { name: string; path: string }[]) {
+  const home = { name: getContent(locale).ui.header.home, path: paths.home(locale) };
   return {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
-    itemListElement: [{ name: "Início", path: "/" }, ...items].map((item, i) => ({
+    itemListElement: [home, ...items].map((item, i) => ({
       "@type": "ListItem",
       position: i + 1,
       name: item.name,
@@ -55,5 +58,3 @@ export function breadcrumbJsonLd(items: { name: string; path: string }[]) {
     })),
   };
 }
-
-export const projectBySlug = (slug: string) => projects.find((p) => p.slug === slug);

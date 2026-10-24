@@ -3,22 +3,16 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRef } from "react";
-import { projects } from "@/content/site";
-import { photos } from "@/content/photos";
+import { getContent, paths, type Locale } from "@/content";
+import { getPhotos } from "@/content/photos";
 import { gsap, MOTION_OK, MOTION_REDUCED, ScrollTrigger, useGSAP } from "@/lib/gsap";
 import { IconArrowUpRight } from "../icons";
 import { ClimaNow } from "./ClimaNow";
 import { countUp } from "./CountUp";
 import { Metric } from "./Metric";
 
-const clima = projects[1];
 // do frio ao quente: La Niña à esquerda, a Início no centro, o +3,3 °C do NOAA à direita
-const cards = [photos.climaStory[1], photos.climaDayDetail, photos.clima, photos.climaLive, photos.climaStory[3]];
-const phones = [
-  { photo: photos.climaMobile, caption: "Início, com o menu inferior" },
-  { photo: photos.climaNowMobile, caption: "A história do El Niño" },
-  { photo: photos.climaLiveMobile, caption: "O Pacífico ao vivo" },
-];
+
 // % da largura do card
 const FAN = [
   { x: -92, y: 16, r: -11 },
@@ -29,7 +23,16 @@ const FAN = [
 ];
 
 /** Cena 5 — Clima Cascavel: as telas saem empilhadas e abrem em leque; depois, o app no celular. */
-export function ClimaScene() {
+export function ClimaScene({ locale }: { locale: Locale }) {
+  const c = getContent(locale);
+  const t = c.ui.climaScene;
+  const photos = getPhotos(locale);
+  const clima = c.projects[1];
+  const cards = [photos.climaStory[1], photos.climaDayDetail, photos.clima, photos.climaLive, photos.climaStory[3]];
+  const phones = [photos.climaMobile, photos.climaNowMobile, photos.climaLiveMobile].map((photo, i) => ({
+    photo,
+    caption: t.phones[i],
+  }));
   const root = useRef<HTMLElement>(null);
   const stage = useRef<HTMLDivElement>(null);
   const scene = useRef<HTMLDivElement>(null);
@@ -111,15 +114,17 @@ export function ClimaScene() {
     >
       <div ref={scene} className="flex min-h-[100svh] flex-col justify-center overflow-hidden pb-10 pt-24">
         <div className="wrap text-center">
-          <p className="label">Segundo projeto: {clima.name}</p>
+          <p className="label">
+            {t.label} {clima.name}
+          </p>
           <h2 id="clima-titulo" className="headline mx-auto mt-4 md:display">
             {clima.claim}
           </h2>
           <p className="mt-5 font-pixel text-sm text-amber" aria-hidden>
-            <span className="caret">&gt; sem dado válido, “indisponível”</span>
+            <span className="caret">{t.pixel}</span>
           </p>
           <p className="lead mx-auto mt-6 max-w-[46ch] text-ash">{clima.summary}</p>
-          <ClimaNow className="mt-6 flex justify-center" />
+          <ClimaNow locale={locale} className="mt-6 flex justify-center" />
         </div>
 
         <div
@@ -148,15 +153,13 @@ export function ClimaScene() {
 
       {/* no bolso, como app */}
       <div className="wrap mt-6 md:mt-16">
-        <h3 className="title text-center">No celular, instala como app.</h3>
-        <p className="mx-auto mt-3 max-w-[44ch] text-center text-ash">
-          Menu inferior, página sem conexão e nada do tempo guardado no aparelho.
-        </p>
+        <h3 className="title text-center">{t.phonesTitle}</h3>
+        <p className="mx-auto mt-3 max-w-[44ch] text-center text-ash">{t.phonesText}</p>
       </div>
       <div
         data-phones
         role="region"
-        aria-label="Telas do Clima Cascavel no celular, role para o lado"
+        aria-label={t.phonesAria}
         tabIndex={0}
         className="no-scrollbar mt-10 flex snap-x snap-mandatory gap-5 overflow-x-auto px-5 md:mx-auto md:max-w-5xl md:justify-center md:gap-10 md:overflow-visible md:px-0"
       >
@@ -181,12 +184,12 @@ export function ClimaScene() {
           <p className="title max-w-[22ch]">{clima.principle}</p>
           <p className="mt-4 max-w-[48ch] text-ash">{clima.solution}</p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <Link href={`/projetos/${clima.slug}`} className="pill pill-light">
-              Ver o projeto
+            <Link href={paths.project(locale, clima.slug)} className="pill pill-light">
+              {t.seeProject}
             </Link>
             {clima.live && (
               <a href={clima.live} className="pill pill-glass">
-                Abrir o site
+                {t.openSite}
                 <IconArrowUpRight width={16} height={16} />
               </a>
             )}
@@ -194,7 +197,7 @@ export function ClimaScene() {
         </div>
         <div className="grid grid-cols-2 gap-x-6 gap-y-10 self-start text-cream">
           {clima.metrics.map((m) => (
-            <Metric key={m.label} metric={m} />
+            <Metric key={m.label} metric={m} numberLocale={c.numberLocale} />
           ))}
         </div>
       </div>

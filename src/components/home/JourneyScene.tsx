@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { journey, stack } from "@/content/site";
+import { getContent, type Locale } from "@/content";
 import { gsap, MOTION_OK, ScrollTrigger, useGSAP } from "@/lib/gsap";
 
 const DIGITS = "0123456789".split("");
@@ -10,7 +10,9 @@ const DIGITS = "0123456789".split("");
  * Cena 6 — a trajetória. Fixa: o ano gigante rola dígito a dígito e o cargo troca a cada parada.
  * A lista à direita é o conteúdo de verdade (legível sem JS); o ano grande é decoração.
  */
-export function JourneyScene() {
+export function JourneyScene({ locale }: { locale: Locale }) {
+  const { journey, stack, ui } = getContent(locale);
+  const t = ui.journey;
   const root = useRef<HTMLElement>(null);
   const scene = useRef<HTMLDivElement>(null);
 
@@ -103,9 +105,9 @@ export function JourneyScene() {
       <div ref={scene} className="flex flex-col justify-center py-24 md:min-h-[100svh]">
         <div className="wrap grid grid-cols-[minmax(0,1fr)] items-center gap-12 md:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] md:gap-16">
           <div>
-            <p className="label">A trajetória</p>
+            <p className="label">{t.label}</p>
             <h2 id="trajetoria-titulo" className="headline mt-3 max-w-[16ch]">
-              Da administração ao código, em cinco paradas.
+              {t.title}
             </h2>
             {/* ano gigante (decorativo) */}
             <div aria-hidden className="relative mt-10 hidden md:motion-safe:block">
@@ -164,7 +166,7 @@ export function JourneyScene() {
       {/* stack: lista agrupada + faixa */}
       <div className="border-t border-white/6 py-20 md:py-28">
         <div className="wrap">
-          <h2 className="title">O que eu uso hoje</h2>
+          <h2 className="title">{t.stackTitle}</h2>
           <dl className="mt-8 grid grid-cols-2 gap-8 md:grid-cols-4">
             {stack.map((g) => (
               <div key={g.group}>

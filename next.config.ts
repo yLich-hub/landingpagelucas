@@ -11,7 +11,8 @@ const nextConfig: NextConfig = {
   cacheComponents: true,
   partialPrefetching: true,
   poweredByHeader: false,
-  experimental: { inlineCss: true },
+  // globalNotFound: com duas raízes (pt e en) o 404 vem de app/global-not-found.tsx
+  experimental: { inlineCss: true, globalNotFound: true },
   images: { formats: ["image/avif", "image/webp"], qualities: [75, 85] },
   turbopack: {
     rules: {

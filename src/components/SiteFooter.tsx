@@ -1,8 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
-import { contact, files, person, projects, social } from "@/content/site";
+import { contact, files, getContent, paths, social, type Locale } from "@/content";
 
-export function SiteFooter() {
+export function SiteFooter({ locale }: { locale: Locale }) {
+  const c = getContent(locale);
+  const t = c.ui.footer;
+  const cv = locale === "en" ? (files.cvEn ?? files.cv) : files.cv;
+  const link = "inline-flex min-h-11 items-center text-ash hover:text-cream";
   return (
     <footer className="border-t border-white/6 bg-ink pb-28 pt-16 md:pb-16">
       <div className="wrap grid gap-12 md:grid-cols-[minmax(0,1.4fr)_repeat(3,minmax(0,1fr))]">
@@ -16,68 +20,62 @@ export function SiteFooter() {
             className="h-6 w-auto"
           />
           <p className="mt-5 max-w-xs text-[0.95rem] text-ash">
-            {person.role}, {person.city}. Disponível para trabalho {person.availability}.
+            {c.person.role}, {c.person.city}. {t.available} {c.person.availability}.
           </p>
         </div>
-        <nav aria-label="Projetos">
-          <h2 className="text-sm font-medium text-cream">Projetos</h2>
+        <nav aria-label={t.projects}>
+          <h2 className="text-sm font-medium text-cream">{t.projects}</h2>
           <ul className="mt-3 space-y-1">
-            {projects.map((p) => (
+            {c.projects.map((p) => (
               <li key={p.slug}>
-                <Link
-                  href={`/projetos/${p.slug}`}
-                  className="inline-flex min-h-11 items-center text-ash hover:text-cream"
-                >
+                <Link href={paths.project(locale, p.slug)} className={link}>
                   {p.name}
                 </Link>
               </li>
             ))}
           </ul>
         </nav>
-        <nav aria-label="Contato e redes">
-          <h2 className="text-sm font-medium text-cream">Contato</h2>
+        <nav aria-label={t.contact}>
+          <h2 className="text-sm font-medium text-cream">{t.contact}</h2>
           <ul className="mt-3 space-y-1">
             <li>
-              <a
-                href={`mailto:${contact.email}`}
-                className="inline-flex min-h-11 items-center break-all text-ash hover:text-cream"
-              >
+              <a href={`mailto:${contact.email}`} className={`${link} break-all`}>
                 {contact.email}
               </a>
             </li>
             <li>
-              <a href={social.github} className="inline-flex min-h-11 items-center text-ash hover:text-cream">
+              <a href={social.github} className={link}>
                 GitHub
               </a>
             </li>
             <li>
-              <a href={social.linkedin} className="inline-flex min-h-11 items-center text-ash hover:text-cream">
+              <a href={social.linkedin} className={link}>
                 LinkedIn
               </a>
             </li>
             <li>
-              <a href={social.instagram} className="inline-flex min-h-11 items-center text-ash hover:text-cream">
+              <a href={social.instagram} className={link}>
                 Instagram
               </a>
             </li>
           </ul>
         </nav>
-        <nav aria-label="Documentos">
-          <h2 className="text-sm font-medium text-cream">Documentos</h2>
+        <nav aria-label={t.documents}>
+          <h2 className="text-sm font-medium text-cream">{t.documents}</h2>
           <ul className="mt-3 space-y-1">
             <li>
-              <a href={files.cv} download className="inline-flex min-h-11 items-center text-ash hover:text-cream">
-                Currículo (PDF)
+              <a href={cv} download className={link}>
+                {t.cv}
               </a>
             </li>
             <li>
-              <a href={files.diploma} download className="inline-flex min-h-11 items-center text-ash hover:text-cream">
-                Diploma de Administração (PDF)
+              <a href={files.diploma} download className={link}>
+                {t.diploma}
               </a>
             </li>
             <li>
-              <a href={social.siteRepo} className="inline-flex min-h-11 items-center text-ash hover:text-cream">
-                Código deste site
+              <a href={social.siteRepo} className={link}>
+                {t.siteCode}
               </a>
             </li>
           </ul>
@@ -87,7 +85,7 @@ export function SiteFooter() {
         <span className="font-pixel text-amber" aria-hidden>
           &gt;{" "}
         </span>
-        Feito em Cascavel, com Next.js. Todas as telas são dos projetos reais.
+        {t.made}
       </p>
     </footer>
   );
