@@ -39,7 +39,7 @@ npm run build && npm start
 | Rotas                                                                               | `src/app/(pt)/…` e `src/app/(en)/en/…` (cada idioma é uma raiz com o próprio `<html lang>`); o 404 dos dois fica em `src/app/global-not-found.tsx` |
 | Logo, favicon e imagens de compartilhamento (uma por idioma)                        | `npm run logo` (gera tudo a partir de `scripts/build-logo.mjs`)                                                                                    |
 | Currículo e diploma                                                                 | `public/curriculo-lucas-maciel-vieira.pdf`, `public/diploma-administracao.pdf`                                                                     |
-| Currículo em inglês                                                                 | coloque o PDF em `public/` e aponte `files.cvEn` em `shared.ts`: as páginas em inglês passam a usá-lo                                              |
+| Currículo em inglês                                                                 | `public/resume-lucas-maciel-vieira-en.pdf` (apontado em `files.cvEn`, `shared.ts`); para trocar, substitua o arquivo                               |
 | Esconder o WhatsApp                                                                 | deixe `contact.whatsappNumber` vazio em `shared.ts`: o botão flutuante e o convite passam a usar só e-mail                                         |
 
 ## Pendências (confirmar com o Lucas)
@@ -51,9 +51,9 @@ Informações:
 - [x] **Certto**: saída em julho de 2026 (confirmado em 20/10/2026).
 - [x] **Repositório deste site**: o código novo substituiu o portfólio em Astro no próprio `yLich-hub/landingpagelucas` (20/10/2026); o histórico antigo continua no Git.
 - [x] **CV em PDF**: substituído em 20/10/2026 pela versão nova exportada do LinkedIn (LinkedIn novo, Certto até jul/2026, certificados Cambridge PET e KET).
-- [ ] **Currículo em inglês**: as páginas em inglês oferecem o CV em português e avisam isso no botão (“Résumé (PDF, in Portuguese)”). Com o LinkedIn em inglês, dá para exportar um CV em inglês; depois é só apontar `files.cvEn` em `shared.ts`.
+- [x] **Currículo em inglês**: `public/resume-lucas-maciel-vieira-en.pdf` (exportado do LinkedIn, enviado em 23/10/2026); as páginas em inglês usam este (`files.cvEn` em `shared.ts`).
 - [ ] **Revisão do inglês**: os textos de `src/content/en.ts` foram traduzidos a partir do site em português; vale uma leitura sua (ou de alguém fluente) antes de mandar para recrutadores.
-- [ ] **E-mail no CV**: o CV ainda traz `@hotmail.com`; o site usa `lucasmacielvieira55@gmail.com`. Se o gmail for o principal, troque o e-mail de contato no LinkedIn e exporte de novo.
+- [ ] **E-mail no CV**: os dois CVs (português e inglês) ainda trazem `@hotmail.com`; o site usa `lucasmacielvieira55@gmail.com`. Se o gmail for o principal, troque o e-mail de contato no LinkedIn e exporte de novo.
 
 Arquivos:
 

@@ -26,9 +26,9 @@ export const social = {
 };
 
 export const files = {
-  // TODO: quando houver currículo em inglês, colocar em public/ e apontar cvEn para ele (en.ts usa cvEn ?? cv).
   cv: "/curriculo-lucas-maciel-vieira.pdf",
-  cvEn: undefined as string | undefined,
+  // currículo em inglês exportado do LinkedIn, enviado pelo Lucas em 23/10/2026 (as páginas em inglês usam este)
+  cvEn: "/resume-lucas-maciel-vieira-en.pdf" as string | undefined,
   diploma: "/diploma-administracao.pdf", // cópia com RG e data de nascimento tarjados (site antigo)
 };
 
